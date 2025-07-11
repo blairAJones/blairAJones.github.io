@@ -5,6 +5,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">MySite</a>
@@ -13,6 +14,7 @@
               aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -21,19 +23,33 @@
           <li class="nav-item">
             <a class="nav-link" href="about.html">About</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="projects.html">Projects</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="projects.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Projects
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="CSCI5612.html">CSCI5612</a></li>
+              <li><a class="dropdown-item" href="coming_soon.html">Coming Soon</a></li>
+            </ul>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
+  <!-- Page content -->
   <div class="container mt-4">
     <h1>My Projects</h1>
-    <p>Showcase your projects here! You can add text, images, or links.</p>
+    <p>Welcome to the projects page! Choose a project from the dropdown menu above or from the list below.</p>
+
+    <div class="list-group">
+      <a href="CSCI5612.html" class="list-group-item list-group-item-action">CSCI5612 Project</a>
+      <a href="coming_soon.html" class="list-group-item list-group-item-action">Coming Soon</a>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+

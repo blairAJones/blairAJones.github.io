@@ -59,6 +59,7 @@
         <a href="#data" class="me-4">Data</a>
         <a href="#code" class="me-4">Code</a>
         <a href="#results" class="me-4">Results</a>
+        <a href="#summary" class="me-4">Summary</a>
       </div>
 
       <h3 id="overview">Overview</h3>
@@ -89,7 +90,7 @@
       <br>
       <h3 id="data">Data <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
       <p>The dataframes created from 
-        <a href="CSCI5612_dataprep.html">Data Prep/EDA</a> 
+        <a href="CSCI5612_dataprep.html">Data Prep/EDA</a> and <a href="https://github.com/blairAJones/ShoppingML/tree/main/data" target="_blank">data files</a>
         continue to be analyzed.</p>
       <p>For the eBay data, the numerical features used in this analysis were
         as follows:</p>
@@ -181,12 +182,14 @@
       <p>Two select features were plotted, cubic feet (size) vs. ratings
         totals, and achieved convergence within 5 iterations.</p>
       <p style="text-align: center;"><img src="/images/2/kmeans_micro.gif" width=50%/></p>
-      <h4 id="summary">Summary</h4>
+      <h3 id="summary">Summary <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
       <p>Ultimately, clustering found some interesting connections but it
         remained difficult to identify clear clusters in this data. It is
         possible that the data is just not naturally clustered, or that the
         numerical features do not tell the whole story of these datasets, and
-        categorical feature analysis is required as well.</p>
+        categorical feature analysis is required as well.  Eventually, investigating other clustering 
+        methods that allow for categorical features, such as K-Prototypes and K-Modes, will be
+        pursued.  </p>
     </div>
     <div style="height: 100px;"></div>
   </div>

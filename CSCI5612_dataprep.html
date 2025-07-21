@@ -41,16 +41,17 @@
       <li class="nav-item"><a class="nav-link" href="CSCI5612.html">Introduction</a></li>
       <li class="nav-item"><a class="nav-link active" href="CSCI5612_dataprep.html">Data Prep/EDA</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_clustering.html">Clustering</a></li>
+      <li class="nav-item"><a class="nav-link" href="CSCI5612_pca.html">PCA</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_naivebayes.html">Naive Bayes</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_decisiontrees.html">Decision Trees</a></li>
-      <li class="nav-item"><a class="nav-link" href="CSCI5612_svm.html">Support Vector Machines</a></li>
+      <li class="nav-item"><a class="nav-link" href="CSCI5612_svm.html">SVM</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_regression.html">Regression</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_nn.html">Neural Nets</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_conclusion.html">Conclusion</a></li>
     </ul>
 
     <div class="mt-4"> <!-- START HERE -->
-      <h2> Data Prep and Exploratory Data Analysis</h2>
+      <h1> Data Prep and Exploratory Data Analysis</h1>
       <!-- Local section links -->
       <div class="section-nav mb-3">
         <a href="#ebay-api-and-data-cleaning" class="me-4">eBay API & Data</a>
@@ -58,7 +59,7 @@
         <a href="#exploratory-data-analysis" class="me-4">EDA</a>
         <a href="#summary" class="me-4">Summary</a>
       </div>
-      <h4 id="ebay-api-and-data-cleaning">eBay API and Data Cleaning</h4>
+      <h3 id="ebay-api-and-data-cleaning">eBay API and Data Cleaning</h3>
       <p>The full code for the API calls and initial data cleaning in Python
         discussed below is available 
         <a href="https://github.com/blairAJones/ShoppingML/blob/main/API_datacleaning.ipynb" target="_blank">here</a>.</p>
@@ -78,7 +79,7 @@
       <p>After obtaining the data request, a .json file was created.</p>
       <figure>
         <img src="/images/before_cleaning.png" alt="Initial Data View" width=30% />
-        <figcaption aria-hidden="true">Initial Data View</figcaption>
+        <figcaption aria-hidden="true" style="font-size: 13px;">Initial Data View</figcaption>
       </figure>
       <p>Then, the .json was converted to a pandas dataframe. Fields were reviewed
         and then a first round of data cleaning and
@@ -97,8 +98,8 @@
         to import into an R program for exploratory data analysis, which will be
         discussed below.</p>
       <figure>
-        <img src="/images/after_cleaning.png" alt="Dataframe snippet" width=40% />
-        <figcaption aria-hidden="true">Dataframe snippet</figcaption>
+        <img src="/images/after_cleaning.png" alt="Dataframe snippet" width=50% />
+        <figcaption aria-hidden="true" style="font-size: 13px;">Dataframe snippet</figcaption>
       </figure>
       <p>Similarly to the iPhone data, the soccer jerseys .json was converted
         to a pandas dataframe and additional information was considered. Various
@@ -112,8 +113,8 @@
         <figcaption aria-hidden="true">Example of dataframe extract</figcaption>
       </figure>
 
-      <h4 id="amazon-api-and-data-cleaning">Amazon API and Data Cleaning <a href="#top"
-          style="font-size: 0.6em;">[Top]</a></h4>
+      <h3 id="amazon-api-and-data-cleaning">Amazon API and Data Cleaning <a href="#top"
+          style="font-size: 0.6em;">[Top]</a></h3>
       <p>For the Amazon data, <a href="https://app.rainforestapi.com/playground" target="_blank">Rainforest API</a>
         was used.</p>
       <figure>
@@ -130,22 +131,22 @@
         various machine learning models. The Rainforest API free tier is limited
         and thus additional searches may not be available without upgrading the
         account.</p>
-      <h4 id="exploratory-data-analysis">Exploratory Data Analysis <a href="#top" style="font-size: 0.6em;">[Top]</a>
-      </h4>
+      <h3 id="exploratory-data-analysis">Exploratory Data Analysis <a href="#top" style="font-size: 0.6em;">[Top]</a>
+      </h3>
       <p>Here are the <a href="https://github.com/blairAJones/ShoppingML/blob/main/EDA.Rmd" target="_blank">full code</a> 
          and <a href="https://github.com/blairAJones/ShoppingML/tree/main/data" target="_blank">data files</a> used 
          for the exploratory data analysis.</p>
       <p>The initial data exploratory analysis was performed in R, using ggplot
         and tidyverse.</p>
-      <h5 id="ebay">eBay</h5>
+      <h4 id="ebay">eBay</h4>
       <p>First, a simple iPhone data histogram was created.</p>
-      <p><img src="/images/histograms.png" width=40% /></p>
+      <p style="text-align: center;"><img src="/images/histograms.png" width=40% /></p>
       <p>From here, it is noted that there are cell phone accessories included
         in the search. The data contains a category ID, so this was used to
         filter the data as <em>iPhones only</em>.</p>
       <p>A histogram of phones by price, further segmented by condition, was
         prepared.</p>
-      <p><img src="/images/hist_cond.png" width=40% /></p>
+      <p style="text-align: center;"><img src="/images/hist_cond.png" width=40% /></p>
       <p>From this, it can be seen that a number of phones were listed at less than
         $100, which seems abnormal. Upon review of items’ descriptions, these
         were accessories that were incorrectly given a category ID of “cell
@@ -153,7 +154,7 @@
       <p>Then, a scatter plot of phone listings using price vs. days listed
         was created, in which an additional flag of “discount” used to highlight
         items that were marked down from their original price.</p>
-      <p><img src="images/items_by_days.png" width=40% /></p>
+      <p style="text-align: center;"><img src="images/items_by_days.png" width=40% /></p>
       <p>From the original data cleaning in Python, older models such as
         iPhone 5/6 were removed. Models 14 and above were kept; although the
         search was for iPhone 16, it was thought that the model number could be
@@ -163,12 +164,12 @@
         will be investigated for possible removal from the data set.</p>
       <p>Condition (i.e. New vs. Used) was an available field and used to
         visualize average prices.</p>
-      <p><img src="/images/price_by_cond.png" width=40% /></p>
+      <p style="text-align: center;"><img src="/images/price_by_cond.png" width=40% /></p>
       <p>There does appear to be some movement in average prices based on condition, 
         but one needs to be mindful of uneven observations in each bucket.  More analysis
         is needed.</p>
       <p>Condition and days listed could be of interest.</p>
-      <p><img src="/images/prices_bydays.png" width=40% /></p>
+      <p style="text-align: center;"><img src="/images/prices_bydays.png" width=40% /></p>
       <p>For the soccer jerseys data, similar EDA was performed. Top clubs,
         e.g. Liverpool or Real Madrid, were identified by the writer based on
         simple internet search (of course, there is some subjectivity with
@@ -176,32 +177,32 @@
         clubs do tend to be priced higher.  It does not appear that jerseys
         from top countries (again, subjective) are in general priced higher,
         so further analysis would need to be completed on this potential feature.</p>
-      <p><img src="/images/top_clubs.png" width=60% /></p>
+      <p style="text-align: center;"><img src="/images/top_clubs.png" width=60% /></p>
       <p>A multiple linear regression was created as a baseline; however, the QQ
         plot showed significant issues with the normality assumption.</p>
-      <p><img src="/images/qqplot.png" width=30% /></p>
+      <p style="text-align: center;"><img src="/images/qqplot.png" width=30% /></p>
       <p>To test, prices were converted to a log-scale and another model was
         created. The QQ Plot showed improvement over the
         non-transformed price. However, there are likely still issues with assumptions of
         linearity and feature selection. Future modeling will attempt to address these issues.</p>
-      <p><img src="/images/qqplot_log_price.png" width=30% /></p>
+      <p style="text-align: center;"><img src="/images/qqplot_log_price.png" width=30% /></p>
       <p>Once additional models are built, regular vs. log price will be
         considered.</p>
-      <h5 id="amazon">Amazon</h5>
+      <h4 id="amazon">Amazon</h4>
       <p>For the Amazon data, different fields are available, including
         ratings, sponsored (yes/no), and recent sales, although granular data
         for this is not available (only 5K+ / 10K+, for example).</p>
       <p>Of interest could be if sponsored listings and ratings are correlated
         with sales quantity.</p>
-      <p><img src="/images/recent_spon.png" width=40% /></p>
-      <p><img src="/images/sales_by_rat.png" width=40% /></p>
+      <p style="text-align: center;"><img src="/images/recent_spon.png" width=40% /></p>
+      <p style="text-align: center;"><img src="/images/sales_by_rat.png" width=40% /></p>
       <p>It is unclear how “recent” the sales figures are, but it appears
         there could be outliers in this dataset with items with fewer recent
         sales but significant ratings. Additional analysis will be performed on feature
         significance and model assumptions throughout the project.  Sales quantities
         could be considered a response variable; however, it is unclear if the lack of granularity may
         cause issues with predictions.  Similar to the eBay data, current price will be modeled. </p>
-      <h4 id="summary">Summary <a href="#top" style="font-size: 0.6em;">[Top]</a></h4>
+      <h3 id="summary">Summary <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
       <p>After converting the raw data to a pandas dataframe, a cursory review revealed that data cleaning
         was necessary on a number of fields. In addition, it was obvious that
         extracting relevant data embedded within the “title” field and

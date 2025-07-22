@@ -65,8 +65,16 @@
       <h3 id="overview">Overview</h3>
       <p>K-Means and hierarchical clustering are unsupervised machine learning
         techniques which group data together based on similarity metrics.
-        K-Means uses a pre-specified number of clusters (k) while hierarchical
-        clustering grows a hierarchy of clusters from the bottom-up. Both
+        K-Means uses a pre-specified number of clusters (k) to partition the data 
+        by minimizing the within cluster sum of squares (squared Euclidean distances)
+        and updating cluster centroids using the expectation-maximization algorithm:
+        assign each point to nearest center then update each cluster's centroid, until 
+        convergence has been obtained.</p>
+        
+        <p>Hierarchical
+        clustering grows a hierarchy of clusters from the bottom-up.  The model starts 
+        with each point as its own cluster and merges clusters based on a linkage method 
+        and distance formula. Both
         methods allow the user to identify underlying patterns in the data
         across multiple features and can assist with reducing the dimension of
         large datasets.</p>
@@ -117,16 +125,20 @@
       <h4 id="ebay-iphones-data">eBay iPhones Data</h4>
       <h5 id="k-means">K-Means</h5>
       <p>On the eBay iPhone data, a K-Means elbow plot was created to identify
-        a choice for k number of clusters.</p>
+        a choice for k number of clusters.  This plot is meant to find at which k 
+      is the decrease in the inertia (within-cluster sum of squares) only marginal.</p>
       <p style="text-align: center;"><img src="/images/2/elbow_iphone.png" width=40%/></p>
       <p>There is not a clear point in which the plot “bends”; although it
         does appear that around k=4 or 5, there is a decrease in the slope, but
         does seem to increase slightly again.</p>
       <p>Then, a silhouette plot was created to assist with the selection of
-        k.</p>
+        k.  The silhouette method measures how similar a data point is within its 
+        own cluster (from -1 to 1).  The average measure per k value is then plotted, 
+        where the higher values represent data that is more similar to its clusters. </p>
       <p style="text-align: center;"><img src="/images/2/silh_iphone.png" width=40%/></p>
       <p>Based on the peak at 4, k=4 was chosen for further
-        analysis.</p>
+        analysis.  Although k=11 looks to be slightly higher; a smaller k should be 
+        better for interpretability.  </p>
       <p style="text-align: center;"><img src="/images/2/kclust_sum.png" width=60%/></p>
       <p>The above cluster summary shows the counts and mean feature values by
         cluster number.  While the clusters are not balanced, there 
@@ -151,10 +163,11 @@
         minimizes the within cluster variances as they are built; complete,
         which considers the maximum distance between any pair of points within a
         cluster; and average, which considers the average distance of the points
-        in a cluster. These use Euclidean distance to measure; another option
-        would be to consider cosine similarity as the distance measure, along
-        with a link function (note that Ward uses Euclidean only). So, Ward and
-        Complete linkage with Euclidean distance along with Complete linkage and
+        in a cluster. These can use Euclidean distance to measure; another option
+        would be to consider cosine similarity (using cosine of angles between points, -1 to 1) 
+        as the distance ("similarity") measure, along
+        with a linkage function (note that Ward uses Euclidean only). So, Ward and
+        complete linkage with Euclidean distance along with complete linkage and
         cosine similarity distance were chosen to create dendograms.</p>
       <p style="text-align: center;"><img src="/images/2/dendogram_iphone.png" width=100%/></p>
       <p><img src="/images/2/hclust_counts.png" width=20%/></p>

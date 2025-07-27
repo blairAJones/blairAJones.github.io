@@ -4,6 +4,16 @@
 <head>
     <title>CSCI5612 - PCA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* wrap tab labels */
+    .nav-tabs .nav-link {
+      white-space: normal !important;
+      word-break: break-word;
+      max-width: 160px;
+      display: block;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
@@ -42,8 +52,8 @@
             <li class="nav-item"><a class="nav-link" href="CSCI5612_dataprep.html">Data Prep/EDA</a></li>
             <li class="nav-item"><a class="nav-link" href="CSCI5612_clustering.html">Clustering</a></li>
             <li class="nav-item"><a class="nav-link active" href="CSCI5612_pca.html">PCA</a></li>
-            <li class="nav-item"><a class="nav-link" href="CSCI5612_naivebayes.html">Naive Bayes</a></li>
-            <li class="nav-item"><a class="nav-link" href="CSCI5612_decisiontrees.html">Decision Trees</a></li>
+            <li class="nav-item"><a class="nav-link" href="CSCI5612_naivebayes.html">Naive Bayes & KNN</a></li>
+            <li class="nav-item"><a class="nav-link" href="CSCI5612_decisiontrees.html">Decision Tree / Random Forests</a></li>
             <li class="nav-item"><a class="nav-link" href="CSCI5612_svm.html">SVM</a></li>
             <li class="nav-item"><a class="nav-link" href="CSCI5612_regression.html">Regression</a></li>
             <li class="nav-item"><a class="nav-link" href="CSCI5612_nn.html">Neural Nets</a></li>
@@ -80,14 +90,14 @@
                 dimension of the dataset by truncating by a limited number of PCs.
             </p>
             <figure style="text-align: center;">
-                <img src="/images/2/pca_ex.png" alt="Example PCA plot plot with synthetic data" width=40%/>
+                <img src="/images/2/pca_ex.png" alt="Example PCA plot plot with synthetic data" width=40% />
                 <figcaption aria-hidden="true" style="font-size: 13px;">Example PCA plot plot with synthetic
                     data</figcaption>
             </figure>
             <p>PCA is also helps plotting in 2D as long as the first two PCs
                 explain enough of the data.</p>
             <figure style="text-align: center;">
-                <img src="/images/2/scree_ex.png" alt="Example Scree plot with synthetic data" width=40%/>
+                <img src="/images/2/scree_ex.png" alt="Example Scree plot with synthetic data" width=40% />
                 <figcaption aria-hidden="true" style="font-size: 13px;">Example Scree plot with synthetic
                     data</figcaption>
             </figure>
@@ -98,12 +108,13 @@
             <h3 id="data">Data <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
             <p>Principal Component Analysis (PCA) was completed on the eBay soccer
                 jerseys data as well as the Amazon Lego data from <a href="CSCI5612_dataprep.html">Data Prep/EDA</a>
-            and <a href="https://github.com/blairAJones/ShoppingML/tree/main/data" target="_blank">data files</a>.</p>
+                and <a href="https://github.com/blairAJones/ShoppingML/tree/main/data" target="_blank">data files</a>.
+            </p>
             <p>Because PCA uses variance / covariance data to create the linear
                 combinations, only numerical features are considered.</p>
             <p>The following numerical features were used:</p>
-            <p><img src="/images/2/features_soccer.png" width=60%/></p>
-            <p><img src="/images/2/features_lego.png" width=60%/></p>
+            <p><img src="/images/2/features_soccer.png" width=60% /></p>
+            <p><img src="/images/2/features_lego.png" width=60% /></p>
             <p>Because the values are in different scales, the features are scaled
                 in order to properly assess variance.</p>
             <br>
@@ -118,9 +129,9 @@
                 Amazon data. However, PCA is needed for visualizing clusters in 2D, as
                 well as identifying latent trends.</p>
             <h4 id="ebay-soccer-jerseys">eBay Soccer Jerseys</h4>
-            <p>The following are the loadings (linear combinations of the original features) 
+            <p>The following are the loadings (linear combinations of the original features)
                 from the soccer data:</p>
-            <p><img src="/images/2/loadings_soccer.png" width=40%/></p>
+            <p><img src="/images/2/loadings_soccer.png" width=40% /></p>
             <p>The loadings represent how much the original features factor into the
                 new principal components. For example, PC1 is heavily influenced
                 (positively) by title length and additional image count, which both
@@ -129,35 +140,35 @@
                 influence from days listed, so
                 this may contrast higher vs. lower volume sellers. PC3 is driven by feedback
                 percentage (proportion of positive feedback of total), which indicates a
-                higher quality seller.  The PCA loadings combine certain features to create additional ones like 
+                higher quality seller. The PCA loadings combine certain features to create additional ones like
                 "high-quality listing", "high-volume seller" and "high-quality seller".</p>
-            <p style="text-align: center;"><img src="/images/2/scree_soccer.png" width=40%/></p>
+            <p style="text-align: center;"><img src="/images/2/scree_soccer.png" width=40% /></p>
             <p>The scree plot shows that it takes five principal components to
-                explain 80% of the variance in the data.  The first two PCs only explain around 40% 
-                of the variance.  Because the original data had
+                explain 80% of the variance in the data. The first two PCs only explain around 40%
+                of the variance. Because the original data had
                 only numerical seven features, this is not a meaningful reduction to
-                dimension; however, as noted above, the PCA loadings provided some additional insight into 
+                dimension; however, as noted above, the PCA loadings provided some additional insight into
                 the data.</p>
             <h4 id="amazon-lego">Amazon Lego</h4>
             <p>The following are the loadings from the Lego data:</p>
-            <p><img src="/images/2/loadings_lego.png" width=40%/></p>
+            <p><img src="/images/2/loadings_lego.png" width=40% /></p>
             <p>PC1 appears to capture the connection with discounting and total
                 ratings, whereas PC2 seems to capture discounts with negatively
                 correlated recent sales, meaning items that are likely discounted to
                 move. PC3 almost exclusively factors in the product rating.</p>
-            <p style="text-align: center;"><img src="/images/2/scree_lego.png" width=40%/></p>
+            <p style="text-align: center;"><img src="/images/2/scree_lego.png" width=40% /></p>
             <p>The scree and cumulative variance plots show that it takes three PCs
                 to obtain 80% of variance explained.</p>
-            <p style="text-align: center;"><img src="/images/2/proj_lego.png" width=40%/></p>
+            <p style="text-align: center;"><img src="/images/2/proj_lego.png" width=40% /></p>
             <p>The projection of the data in PC1 and 2 was plotted with a color
                 gradient from the original feature <em>recent sales</em>, as this feature was
                 moderately positive in PC1 (left-right direction) and moderately
                 negative in PC2 (up-down direction), which can be seen in the color gradient above.</p>
-            <p style="text-align: center;"><img src="/images/2/biplot_lego.png"width=40%/></p>
-            <p>The biplot highlights the direction of the features in PC1 and 2.  For PC1,
-                all features have a positive influence; however, some more than others, like discount 
-                and ratings totals, while PC2 has a positive influence from discounting and rating scores and negative 
-                influence from ratings totals and recent sales.  
+            <p style="text-align: center;"><img src="/images/2/biplot_lego.png" width=40% /></p>
+            <p>The biplot highlights the direction of the features in PC1 and 2. For PC1,
+                all features have a positive influence; however, some more than others, like discount
+                and ratings totals, while PC2 has a positive influence from discounting and rating scores and negative
+                influence from ratings totals and recent sales.
             </p>
             <h3 id="summary">Summary <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
             <p>Because the original data is not high-dimensional, PCA was mostly

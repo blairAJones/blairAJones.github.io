@@ -12,6 +12,17 @@
       max-width: 160px;
       display: block;
       text-align: center;
+      height: 100%;
+      /* ensure uniform tab height */
+      border: 1px solid transparent;
+      /* fix alignment shift on hover */
+    }
+
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-link.active {
+      border-color: #dee2e6 #dee2e6 #fff;
+      /* fix active tab border */
+      background-color: #f8f9fa;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
@@ -64,7 +75,7 @@
     </ul>
 
     <div class="mt-4">
-      <h1>Decision Trees</h1>
+      <h1 class="mb-4">Decision Trees</h1>
       <!-- Local section links -->
       <div class="section-nav mb-3">
         <a href="#overview" class="me-4">Overview</a>
@@ -101,7 +112,7 @@
       <p>Decision tree models can handle both numerical and (encoded)
         categorical features. There is not a distance measurement like in other
         models which only respond well to true continuous features.</p>
-
+      <br>
       <h3 id="data">Data <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>Data files are found <a href="https://github.com/blairAJones/ShoppingML/tree/main/data"
           target="_blank">here</a>.</p>
@@ -139,7 +150,7 @@
       <p>A link to the full code for this analysis is found
         <a href="https://github.com/blairAJones/ShoppingML/blob/main/decision_trees.ipynb" target="_blank">here</a>.
       </p>
-
+      <br>
       <h3 id="results">Results <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>For classification methods, the following metrics on the test
         set were considered along with the confusion matrix visual: accuracy, the
@@ -221,7 +232,7 @@
         mis-classed items may want to be investigated for potential
         overpricing/underpricing.</p>
       <p style="text-align: center;"><img src="images/3/lego_price_disc.png" width="60%" /></p>
-
+      <br>
       <h3 id="summary">Summary <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>As expected, given the combination of both numerical and categorical
         (and binary) variables, tree-based models performed fairly well on the

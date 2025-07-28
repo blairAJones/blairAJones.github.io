@@ -12,8 +12,21 @@
       max-width: 160px;
       display: block;
       text-align: center;
+      height: 100%;
+      /* ensure uniform tab height */
+      border: 1px solid transparent;
+      /* fix alignment shift on hover */
+    }
+
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-link.active {
+      border-color: #dee2e6 #dee2e6 #fff;
+      /* fix active tab border */
+      background-color: #f8f9fa;
     }
   </style>
+  <meta name="description" content="Clustering and analysis on the Shopping Machine Learning project for CSCI5612.">
+
 </head>
 
 <body>
@@ -61,7 +74,7 @@
     </ul>
 
     <div class="mt-4">
-      <h1>Clustering</h1>
+      <h1 class="mb-4">Clustering</h1>
       <!-- Local section links -->
       <div class="section-nav mb-3">
         <a href="#overview" class="me-4">Overview</a>
@@ -111,13 +124,13 @@
         continue to be analyzed.</p>
       <p>For the eBay data, the numerical features used in this analysis were
         as follows:</p>
-      <p><img src="/images/2/features_iphones.png" width=60%/></p>
+      <p style="text-align: center;"><img src="/images/2/features_iphones.png" width=60%/></p>
       <p>The seller feedback score represents the count of feedback received
         and the percentage represents the proportion of positive feedback out of
         total.</p>
       <p>For the Amazon data, the numerical features used in this analysis
         were as follow:</p>
-      <p><img src="/images/2/features_micro.png" width=60%/></p>
+      <p style="text-align: center;"><img src="/images/2/features_micro.png" width=60%/></p>
       <p>There are fewer quantitative features for this data and additional
         filtering needed to be completed as not all listings had a cubic feet
         (microwave size) description in the title.</p>
@@ -179,7 +192,7 @@
         complete linkage with Euclidean distance along with complete linkage and
         cosine similarity distance were chosen to create dendograms.</p>
       <p style="text-align: center;"><img src="/images/2/dendogram_iphone.png" width=100%/></p>
-      <p><img src="/images/2/hclust_counts.png" width=20%/></p>
+      <p style="text-align: center;"><img src="/images/2/hclust_counts.png" width=20%/></p>
       <p>Based on the dendogram and cluster counts, k=6 was selected with 
         the complete linkage using cosine similarity distance, as it appears 
         to have the most balanced clusters.</p>

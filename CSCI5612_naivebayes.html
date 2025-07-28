@@ -12,6 +12,17 @@
       max-width: 160px;
       display: block;
       text-align: center;
+      height: 100%;
+      /* ensure uniform tab height */
+      border: 1px solid transparent;
+      /* fix alignment shift on hover */
+    }
+
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-link.active {
+      border-color: #dee2e6 #dee2e6 #fff;
+      /* fix active tab border */
+      background-color: #f8f9fa;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
@@ -66,7 +77,7 @@
     </ul>
 
     <div class="mt-4">
-      <h1>Naive Bayes and K-Nearest Neighbors</h1>
+      <h1 class="mb-4">Naive Bayes and K-Nearest Neighbors</h1>
       <!-- Local section links -->
       <div class="section-nav mb-3">
         <a href="#overview" class="me-4">Overview</a>
@@ -75,7 +86,6 @@
         <a href="#results" class="me-4">Results</a>
         <a href="#summary" class="me-4">Summary</a>
       </div>
-
       <h3 id="overview">Overview</h3>
       <p>Naive Bayes is classifier model that uses probability for
         classification, and has a major assumption (thus, the “Naive” name) that
@@ -101,7 +111,7 @@
         nearest neighbors. As it is based on distance, numerical features are
         necessary and should be scaled prior to training. The choice of K can be
         tuned during training.</p>
-
+      <br>
       <h3 id="data">Data <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>Data files are found <a href="https://github.com/blairAJones/ShoppingML/tree/main/data"
           target="_blank">here</a>.</p>
@@ -151,12 +161,12 @@ X_train_iphone, X_test_iphone, y_train_iphone, y_test_iphone = train_test_split(
       on unseen data. It also allows the user to identify any potential overfitting of the training data (if there is a
       large
       discrepancy with training and testing metrics). </p>
-
+      <br>
       <h3 id="code">Code <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>A link to the full code for this analysis is found
         <a href="https://github.com/blairAJones/ShoppingML/blob/main/naive_bayes.ipynb" target="_blank">here</a>.
       </p>
-
+      <br>
       <h3 id="results">Results <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>For classification methods, the following metrics on the test
         set were considered along with the confusion matrix visual: accuracy, the
@@ -224,7 +234,7 @@ X_train_iphone, X_test_iphone, y_train_iphone, y_test_iphone = train_test_split(
       <p>After projecting into 2D with PCA, the true and predicted labels
         using KNN were plotted:</p>
       <p style="text-align: center;"><img src="images/3/knn_pca_lego.png" width="65%" /></p>
-
+      <br>
       <h3 id="summary">Summary <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>The Naive Bayes models had mixed results. This is expected due to the
         nature of the data. Since the features are pulled from product listings that sellers post with much of their own

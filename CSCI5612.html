@@ -12,6 +12,17 @@
       max-width: 160px;
       display: block;
       text-align: center;
+      height: 100%;
+      /* ensure uniform tab height */
+      border: 1px solid transparent;
+      /* fix alignment shift on hover */
+    }
+
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-link.active {
+      border-color: #dee2e6 #dee2e6 #fff;
+      /* fix active tab border */
+      background-color: #f8f9fa;
     }
   </style>
 </head>
@@ -61,18 +72,18 @@
     </ul>
 
     <div class="mt-4">
-      <h2 id="undertanding-shopping-trends-using-ml">Understanding Online Shopping
-        Trends using ML</h2>
+      <h1 class="mb-4" id="undertanding-shopping-trends-using-ml">Understanding Online Shopping
+        Trends using ML</h1>
       <p>In 2024, eBay.com had $8.6Bn marketplace <a
           href="https://investors.ebayinc.com/financial-information/sec-filings/sec-filings-details/default.aspx?FilingId=18232012" target="_blank">revenue</a>
         and Amazon.com had $530Bn <a
           href="https://s2.q4cdn.com/299287126/files/doc_financials/2025/ar/Amazon-2024-Annual-Report.pdf" target="_blank">revenue</a>.
         The US Census Bureau of the Department of Commerce estimates US online retail sales of
-        over $300Bn for just the first quarter of 2025 alone <a
-          href="https://www.census.gov/retail/ecommerce.html" target="_blank">[link]</a>.
+        over $300Bn for just the first quarter of <a
+          href="https://www.census.gov/retail/ecommerce.html" target="_blank">2025</a> alone.
         Per the Federal Reserve Bank of St. Louis, this represents 16.2% of total retail sales,
-        a percentage that has been steadily climbing since 2000, with a larger jump in 2020 
-        <a href="https://fred.stlouisfed.org/series/ECOMPCTSA" target="_blank">[link]</a>.
+        a percentage that has been steadily climbing since 2000, with a larger jump 
+        <a href="https://fred.stlouisfed.org/series/ECOMPCTSA" target="_blank">in 2020</a>.
         Online retail sites are teeming with data, both supplier and customer generated.  
         The data on these sites can be harnessed to help both buyers and sellers understand
         market forces, without having to fully rely on the retailer's algorithm. Both eBay and Amazon utilize

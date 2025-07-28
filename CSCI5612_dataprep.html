@@ -12,6 +12,17 @@
       max-width: 160px;
       display: block;
       text-align: center;
+      height: 100%;
+      /* ensure uniform tab height */
+      border: 1px solid transparent;
+      /* fix alignment shift on hover */
+    }
+
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-link.active {
+      border-color: #dee2e6 #dee2e6 #fff;
+      /* fix active tab border */
+      background-color: #f8f9fa;
     }
   </style>
 </head>
@@ -61,7 +72,7 @@
     </ul>
 
     <div class="mt-4"> <!-- START HERE -->
-      <h1> Data Prep and Exploratory Data Analysis</h1>
+      <h1 class="mb-4"> Data Prep and Exploratory Data Analysis</h1>
       <!-- Local section links -->
       <div class="section-nav mb-3">
         <a href="#ebay-api-and-data-cleaning" class="me-4">eBay API & Data</a>
@@ -87,9 +98,11 @@
       <p>“https://api.ebay.com/identity/v1/oauth2/token”</p>
       <p>“https://api.ebay.com/buy/browse/v1/item_summary/search”</p>
       <p>After obtaining the data request, a .json file was created.</p>
-      <figure>
+      <figure style="text-align: center;">
         <img src="/images/before_cleaning.png" alt="Initial Data View" width=30% />
-        <figcaption aria-hidden="true" style="font-size: 13px;">Initial Data View</figcaption>
+        <figcaption style="margin-top: 8px; font-size: 0.80em; color: #555;">
+          Initial Data View
+        </figcaption>
       </figure>
       <p>Then, the .json was converted to a pandas dataframe. Fields were reviewed
         and then a first round of data cleaning and
@@ -107,9 +120,11 @@
         used in analysis and were then exported to .csv. This was done in order
         to import into an R program for exploratory data analysis, which will be
         discussed below.</p>
-      <figure>
+      <figure style="text-align: center;">
         <img src="/images/after_cleaning.png" alt="Dataframe snippet" width=50% />
-        <figcaption aria-hidden="true" style="font-size: 13px;">Dataframe snippet</figcaption>
+         <figcaption style="margin-top: 8px; font-size: 0.80em; color: #555;">
+         Dataframe snippet
+        </figcaption>
       </figure>
       <p>Similarly to the iPhone data, the soccer jerseys .json was converted
         to a pandas dataframe and additional information was considered. Various
@@ -118,18 +133,22 @@
         calculated field was added, which summed up the number of listings that
         specific sellers had open, as a potential feature in modeling to predict
         price and/or competitive listings.</p>
-      <figure>
-        <img src="/images/extract.png" alt="Example of dataframe extract" width=45% />
-        <figcaption aria-hidden="true">Example of dataframe extract</figcaption>
+      <figure style="text-align: center;">
+        <img src="/images/extract.png" alt="Example of dataframe extract" width=50% />
+        <figcaption style="margin-top: 8px; font-size: 0.80em; color: #555;">
+         Example of extracting info
+        </figcaption>
       </figure>
 
       <h3 id="amazon-api-and-data-cleaning">Amazon API and Data Cleaning <a href="#top"
-          style="font-size: 0.6em;">[Top]</a></h3>
+          style="font-size: 0.5em;">[Top]</a></h3>
       <p>For the Amazon data, <a href="https://app.rainforestapi.com/playground" target="_blank">Rainforest API</a>
         was used.</p>
-      <figure>
+      <figure style="text-align: center;">
         <img src="images/rainforest_api.png" alt="Example API code" width=40% />
-        <figcaption aria-hidden="true">Example API code</figcaption>
+        <figcaption style="margin-top: 8px; font-size: 0.80em; color: #555;">
+         Example API code
+        </figcaption>
       </figure>
       <p>The specific code allowed for a general search of products, such as
         microwaves and Lego, which were done separately and saved as .json
@@ -141,7 +160,7 @@
         various machine learning models. The Rainforest API free tier is limited
         and thus additional searches may not be available without upgrading the
         account.</p>
-      <h3 id="exploratory-data-analysis">Exploratory Data Analysis <a href="#top" style="font-size: 0.6em;">[Top]</a>
+      <h3 id="exploratory-data-analysis">Exploratory Data Analysis <a href="#top" style="font-size: 0.5em;">[Top]</a>
       </h3>
       <p>Here are the <a href="https://github.com/blairAJones/ShoppingML/blob/main/EDA.Rmd" target="_blank">full code</a> 
          and <a href="https://github.com/blairAJones/ShoppingML/tree/main/data" target="_blank">data files</a> used 
@@ -212,7 +231,7 @@
         significance and model assumptions throughout the project.  Sales quantities
         could be considered a response variable; however, it is unclear if the lack of granularity may
         cause issues with predictions.  Similar to the eBay data, current price will be modeled. </p>
-      <h3 id="summary">Summary <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
+      <h3 id="summary">Summary <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>After converting the raw data to a pandas dataframe, a cursory review revealed that data cleaning
         was necessary on a number of fields. In addition, it was obvious that
         extracting relevant data embedded within the “title” field and

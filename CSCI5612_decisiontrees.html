@@ -15,6 +15,7 @@
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+    <meta name="description" content="Decision Tree model training and analysis on the Shopping Machine Learning project for CSCI5612.">
 </head>
 
 <body>
@@ -50,7 +51,7 @@
   <div class="container mt-3">
     <ul class="nav nav-tabs">
       <li class="nav-item"><a class="nav-link" href="CSCI5612.html">Introduction</a></li>
-      <li class="nav-item"><a class="nav-link" href="CSCI5612_dataprep.html">Data Prep/EDA</a></li>
+      <li class="nav-item"><a class="nav-link" href="CSCI5612_dataprep.html">Data Prep / EDA</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_clustering.html">Clustering</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_pca.html">PCA</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_naivebayes.html">Naive Bayes & KNN</a></li>
@@ -64,7 +65,6 @@
 
     <div class="mt-4">
       <h1>Decision Trees</h1>
-      <p>This is the decision trees section of the CSCI5612 project.</p>
       <!-- Local section links -->
       <div class="section-nav mb-3">
         <a href="#overview" class="me-4">Overview</a>
@@ -76,115 +76,163 @@
 
       <h3 id="overview">Overview</h3>
       <p>Decision trees are a machine learning technique that create flowchart
-        structures based on data splits. In order to decide how to best split
+        structures based on data splits. These are often interpretable models that do
+        not require a significant amount of data preprocessing. In order to decide how to best split
         the data, metrics like Gini impurity and entropy are used. Gini impurity
         measures node purity (are leaf nodes composed of a single class?), with
         a 0 value meaning a pure node and a 0.5 value meaning there is an even
         split between 2 classes. Entropy measures node disorder, with an evenly
         split node equaling 1.</p>
       <p>Let <span class="math inline">\(p_i\)</span> be the probability of
-        class i: Gini Impurity: <span class="math inline">\(1 - \sum_i
+        class i:</p>
+      <p>Gini Impurity: <span class="math inline">\(1 - \sum_i
           p_i^2\)</span></p>
       <p>Entropy: <span class="math inline">\(-\sum_i p_i \text{log}_2
           (p_i)\)</span></p>
       <p>Feature importance is an important metric in tree-based models and
-        represents the decrease in node impurity based on specific features.</p>
+        represents the decrease in node impurity based on specific features. These values can be visualized
+        for user understanding on which features drive the model results. </p>
       <p>Random Forests are a subset of a decision tree model that creates
         many trees during training, uses bootstrap sampling and chooses a random
         subset of features to train on, which reduces impacts of correlated
-        features and can reduce overfitting by averaging many trees.</p>
+        features and can reduce overfitting by averaging many trees. Given the randomness using boostrapped
+        samples and random feature selection at each split, the number of possible trees is almost endless. This allows
+        the model to not rely too heavily on certain features and generalize better.</p>
       <p>Decision tree models can handle both numerical and (encoded)
         categorical features. There is not a distance measurement like in other
         models which only respond well to true continuous features.</p>
 
-      <h3 id="data">Data <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
+      <h3 id="data">Data <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
+      <p>Data files are found <a href="https://github.com/blairAJones/ShoppingML/tree/main/data"
+          target="_blank">here</a>.</p>
       <p>Classification responses were added to the data sets to test if the
-        decision tree could accurately identify price buckets of “high”,
-        “medium” and “low”. Because prices are not normally distributed, using a
-        clustering technique (like seen here…) to assign these buckets was
-        considered, rather than a simple quantile split.</p>
+        decision tree could accurately identify price buckets of <em>high</em>,
+        <em>medium</em> and <em>low</em>. Because prices are not normally distributed, using a
+        clustering technique <a href="CSCI5612_clustering.html">(like seen here)</a> to assign these buckets was
+        considered, rather than a simple quantile split.
+      </p>
       <p>First, a simple K-means clustering was attempted on the microwaves
         data; however, the buckets ended up extremely unbalanced (108 items in
-        the “low” bucket, while the medium and high buckets each had only 8
+        the <em>low</em> bucket, while the <em>medium</em> and <em>high</em> buckets each had only eight
         items). Other options were explored, and eventually the K-Means
-        Constrained technique was used. This technique uses K-Means but allows
-        the user to put constraints on bucket size, to ensure a more even
+        Constrained technique was used
+        <a href="https://github.com/blairAJones/ShoppingML/blob/main/kmc.py" target="_blank">(code here)</a>.
+      </p>
+      <p>This technique uses K-Means but allows the user to put constraints on bucket size, to ensure a more even
         spread. </p>
-      <p style="text-align: center;"><img src="images/3/kmc_summary.png" width="30%"/></p>
+      <figure style="text-align: center;">
+        <img src="images/3/kmc_summary.png" width="30%" alt="K-means Cluster Summary" />
+        <figcaption style="margin-top: 8px; font-size: 0.95em; color: #555;">
+          K-means constrained clustering summary
+        </figcaption>
+      </figure>
       <p>In addition to the assignment of pricing tiers, a simple
         “is_high_price” boolean variable was added, based on the median price.
         Either the pricing tier or is_high_price would then be the response
         variable to be classified.</p>
       <p>Because decision trees can handle both numerical and (encoded)
         categorical data, all features were considering in training. Categorical
-        features like club name or Lego theme needed to be encoded as binary to
+        features like club name or Lego theme needed to be encoded as binary (using pd.get_dummies) to
         work with these models.</p>
 
-      <h3 id="code">Code <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
-      <p>Code.</p>
+      <h3 id="code">Code <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
+      <p>A link to the full code for this analysis is found
+        <a href="https://github.com/blairAJones/ShoppingML/blob/main/decision_trees.ipynb" target="_blank">here</a>.
+      </p>
 
-      <h3 id="results">Results <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
-      <p>For all data sets, a simple decision tree classifier was created
+      <h3 id="results">Results <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
+      <p>For classification methods, the following metrics on the test
+        set were considered along with the confusion matrix visual: accuracy, the
+        percentage of correctly classified points; recall, the percentage of
+        true positives (how many true positives were accurately predicted?); and
+        the F1 score, which is a mix of recall and precision (how many predicted
+        positives are actually positive?).</p>
+        
+       <p>For all data sets, a simple decision tree classifier was created
         first. Then a random forest model was built using hyperparameter tuning
-        and cross validation. A grid of parameters was chosen, including max
+        and cross validation. A grid of parameters was set-up, including max
         depth, minimum leaf size, and number of trees, and the “best” parameters
-        based on training accuracy were then used on the test set.</p>
+        based on training accuracy were then used on the final model and then the test set.</p>
       <p>As with the Naive Bayes / KNN analysis, training and testing splits
         were created so metrics comparisons can be made on unseen data.</p>
       <h4 id="iphones">iPhones</h4>
       <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-        <p><img src="images/3/cm_iphone.png" alt="Image 1" width="400">
-          <img src="images/3/cm_rf_iphone.png" alt="Image 2" width="400">
+        <p><img src="images/3/cm_iphone.png" alt="Image 1" width="500">
+          <img src="images/3/cm_rf_iphone.png" alt="Image 2" width="500">
         </p>
       </div>
-      <p style="text-align: center;"><img src="images/3/fi_iphone_top10.png" width="40%"/></p>
+      <p style="text-align: center;"><img src="images/3/fi_iphone_top10.png" width="40%" /></p>
       <p>Model number, days listed and title length had over 10% of feature
         importance.</p>
       <p>A partial dependence plot was generated based on days listed and
-        title length.</p>
-      <p style="text-align: center;"><img src="images/3/pdp_iphone.png" width="40%"/></p>
+        title length and class tier <em>high</em> (price).</p>
+      <p style="text-align: center;"><img src="images/3/pdp_iphone.png" width="40%" /></p>
+      <p>The plot shows that a as days listed gets higher, items are less likely to be priced as <em>high</em>.
+        Conversely,
+        longer title lengths are more associated with higher priced items.</p>
       <h4 id="soccer-jerseys">Soccer Jerseys</h4>
       <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-        <p><img src="images/3/cm_soccer.png" alt="Image 1" width="400">
-          <img src="images/3/cm_rf_soccer.png" alt="Image 2" width="400">
+        <p><img src="images/3/cm_soccer.png" alt="Image 1" width="500">
+          <img src="images/3/cm_rf_soccer.png" alt="Image 2" width="500">
         </p>
       </div>
-      <p style="text-align: center;"><img src="images/3/fi_soccer_top10.png" width="40%"/></p>
-      <p>No individual feature represented over 10% of feature importance.</p>
+      <p>While overall metrics improved with the RF model, it should also be noted that the misclassed items in the top
+        right corner and bottom left corner (high to low misclass) improved greatly as well using the RF model.
+      </p>
+      <p style="text-align: center;"><img src="images/3/fi_soccer_top10.png" width="40%" /></p>
+      <p>No individual feature represented over 10% of feature importance. The top feature in terms of importance
+        was seller feedback score, which indicates more of a listing feature compared with a product feature.
+      </p>
       <h4 id="microwaves">Microwaves</h4>
       <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-        <p><img src="images/3/cm_microwave.png" alt="Image 1" width="400">
-          <img src="images/3/cm_rf_microwave.png" alt="Image 2" width="400">
+        <p><img src="images/3/cm_microwave.png" alt="Image 1" width="500">
+          <img src="images/3/cm_rf_microwave.png" alt="Image 2" width="500">
         </p>
       </div>
-      <p style="text-align: center;"><img src="images/3/fi_microwave.png" width="40%"/></p>
+      <p style="text-align: center;"><img src="images/3/fi_microwave.png" width="40%" /></p>
       <p>Cubic feet was overwhelmingly the most important feature,
-        representing nearly 40%.</p>
+        representing nearly 40% of feature importance. This is a product-specific feature (size) which
+        differentiates listings.</p>
       <h4 id="lego">Lego</h4>
       <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
-        <p><img src="images/3/cm_lego.png" alt="Image 1" width="400">
-          <img src="images/3/cm_rf_lego.png" alt="Image 2" width="400">
+        <p><img src="images/3/cm_lego.png" alt="Image 1" width="500">
+          <img src="images/3/cm_rf_lego.png" alt="Image 2" width="500">
         </p>
       </div>
-      <p style="text-align: center;"><img src="images/3/fi_lego_top10.png" width="40%"/></p>
-      <p>Four features had over 10% in importance, with top feature ratings
-        total representing over 20%.</p>
-      <p>Partial dependence plot:</p>
-      <p style="text-align: center;"><img src="images/3/pdp_lego.png" width="40%"/></p>
-      <p>Because the Random Forest model with the three classes did not show
-        much of an improvement in the simple decision tree model, another RF
-        model based on two classes was created.</p>
-      <p style="text-align: center;"><img src="images/3/cm_rf_lego2.png" width="40%"/></p>
+      <p style="text-align: center;"><img src="images/3/fi_lego_top10.png" width="40%" /></p>
+      <p>Four features had over 10% in importance, with top feature <em>ratings
+          total</em> representing nearly 20%. This is a product popularity feature, while the second most important
+        feature, <em>discount $</em> reflects more of a listing feature.</p>
+      <p>Partial dependence plot, based on class tier <em>low</em> (price):</p>
+      <p style="text-align: center;"><img src="images/3/pdp_lego.png" width="40%" /></p>
+      <p>For the partial dependence plot on Lego items, higher ratings totals are associated with lower priced items.
+        Conversely, a higher discount shows a lesser likelihood of a low-priced item as the items are likely priced low
+        enough
+        to begin and do not need discounts to sell-through.
+      </p>
+      <p>Compared with all other product data sets, the Random Forest model for Legos, with the three classes, did not
+        show
+        much of an improvement compared with the simple decision tree model. Another RF
+        model based on two classes (<em>is_high_price</em>, also used <a href="CSCI5612_naivebayes.html">here</a>) was
+        created.</p>
+      <p style="text-align: center;"><img src="images/3/cm_rf_lego2.png" width="40%" /></p>
       <p>The two class model showed a significant improvement in accuracy.
-        Since it’s a simple true/false “high price” classification, the
+        Since it is a simple true/false <em>high price</em> classification, the
         mis-classed items may want to be investigated for potential
         overpricing/underpricing.</p>
-      <p style="text-align: center;"><img src="images/3/lego_price_disc.png" width="60%"/></p>
+      <p style="text-align: center;"><img src="images/3/lego_price_disc.png" width="60%" /></p>
 
-      <h3 id="summary">Summary <a href="#top" style="font-size: 0.6em;">[Top]</a></h3>
+      <h3 id="summary">Summary <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>As expected, given the combination of both numerical and categorical
         (and binary) variables, tree-based models performed fairly well on the
-        classification of this data. Depending on</p>
+        classification of this data. Depending on product, different features had different levels of importance,
+        even in data sets from the same source (Amazon or eBay). This shows there are inherent differences in product
+        pricing.
+        These findings could be used to assist both buyers and sellers in understanding market prices based on specific
+        characteristics.
+        Random Forest models performed the best of all classification models thus far, and were helped by the ability to
+        add
+        tuned hyperparameters in the individual models. </p>
 
     </div>
     <div style="height: 100px;"></div>

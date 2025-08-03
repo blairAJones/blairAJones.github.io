@@ -88,21 +88,21 @@
 
       <h3 id="overview">Overview</h3>
       <p>Support vector machines are supervised learning models that focus on
-        classification by a hyperplane (p-1 dimensional, with p being the number
+        classification using a hyperplane (p-1 dimensional, with p being the number
         of data features). The model assumes the best choice of hyperplane is
         the one that has the largest margin (separation) between the classes.
         Because often the data is not linearly separable, SVM offers the ability
         to convert the data into higher dimensions (imagine points in 2D moving
         upward into the third dimension). This is computationally feasible given
-        a kernel trick, which finds the dot products of the data points as if it
+        the kernel trick, which finds the dot products of the data points as if it
         was already in the higher dimensional space, and then finding the
         optimal hyperplane from there.</p>
       <figure style="text-align: center;">
-        <img src="images/4/svm_ex.png" width="50%" alt="SVM Example - Polynomial Degree 2 kernel" />
+        <img src="images/4/svm_ex.png" width="60%" alt="SVM Example - Polynomial Degree 2 kernel" />
         <figcaption aria-hidden="true">SVM Example - Polynomial Degree 2
           kernel</figcaption>
       </figure>
-      <p>The above is a synthetic example of 2D data that is not linearly
+      <p>The above is a synthetic example of data that is not linearly
         separable in 2D, but is when transformed using a degree 2 polynomial. The
         following are the Kernel function and the feature mapping (new
         coordinates) of x into 3D.</p>
@@ -127,12 +127,13 @@
       <p>Since support vector machines compute dot products of feature
         vectors, only scaled numerical features were used in training these
         models.</p>
-      <pre style="font-size: 12px;"><code class="language-python">
+      <pre style="font-size: 13px;"><code class="language-python">
 num_features_iphone = ["seller.feedbackPercentage", "seller.feedbackScore", "days_listed",  
                        "seller_item_count", "model_number", "additional_image_count", "title_length"]
 
 num_features_lego = ["rating", "ratings_total", "recent_sales_num", "discount$", 
                      "discount%"]
+
 response = "is_high_price"
 </code></pre>
       <p>For all datasets, a train/test split was created (80/20%). All models
@@ -154,7 +155,7 @@ response = "is_high_price"
         grid search allows for different metrics to be considered, such as
         kernel (linear, poly, rbf), cost (0.1, 1, 10), gamma (0.1, 1 poly, rbf
         only), coef (0, 1 poly only), and degree (2, 3, 4 poly only).</p>
-      <pre style="font-size: 12px;"><code class="language-python">
+      <pre style="font-size: 13px;"><code class="language-python">
 params_grid = [{'C': [0.1, 0.5, 1, 5, 10], 'kernel': ['linear']},
 
                {'C': [0.1, 0.5, 1, 5, 10], 'kernel': ['rbf'], 'gamma': ['scale', 0.1, 1]},
@@ -252,7 +253,7 @@ grid_search_iphone = GridSearchCV(estimator = classifier_iphone,
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(array([False, True]), array([229, 79]))</p>
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(array([False, True]), array([61, 17]))</p>
       <p>So additional considerations are needed. In the SVC function,
-        “class_weights = balanced” should be passed through. During the grid
+        <code>class_weights="balanced”</code> should be passed through. During the grid
         search, instead of using “accuracy” as the scoring measure, one may
         consider F1 or Recall, which may handle better when the minority class
         is positive.</p>
@@ -312,7 +313,7 @@ grid_search_iphone = GridSearchCV(estimator = classifier_iphone,
 </div>
 
       <p>Cross-validation found the best model based on accuracy was a degree
-        3 polynomial. The data is non-linear and curved.</p>
+        3 polynomial. The data is non-linear with curved boundaries.</p>
       <p style="text-align: center;"><img src="images/4/cm_svm_soccer.png" width="50%"/></p>
       <p>Confusion matrix metrics were fairly strong and consistent.</p>
       <p>Similar to the iPhone data, calibration, ROC-AUC and precision-recall
@@ -322,7 +323,7 @@ grid_search_iphone = GridSearchCV(estimator = classifier_iphone,
         better than the iPhone data. Running a CalibratedClassifierSV() model
         showed the best threshold was 0.45; the y predictions were
         then updated based on this, with the following metrics noted:</p>
-      <p style="text-align: center;"><img src="images/4/cm_svm_soccer2.png" width="50%"/></p>
+      <p style="text-align: center;"><img src="images/4/cm_svm_soccer2.png" width="45%"/></p>
       <p>The metrics improved for the calibrated model, compared with the raw
         model.  However, there were more false positives captured.</p>
       <h4 id="lego">Lego</h4>
@@ -381,7 +382,7 @@ grid_search_iphone = GridSearchCV(estimator = classifier_iphone,
         (training/test sets, respectively):</p>
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(array([False, True]), array([ 31, 121]))</p> 
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(array([False, True]), array([ 9, 29]))</p>
-      <p>Because of this, the <em>class weights</em> parameter was used in the
+      <p>Because of this, the <code>class_weights</code> parameter was used in the
         model and different scoring options in the grid search were used,
         including accuracy, balanced accuracy, and F1.</p>
       <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">

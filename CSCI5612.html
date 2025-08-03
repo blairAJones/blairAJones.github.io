@@ -141,6 +141,14 @@
         (seller differentiation) for Soccer jerseys.  For Microwaves and Lego products, cubic feet (product differentiation)
         and ratings totals (product popularity) were the top important features, respectively.  
       </p>
+      <p> Working through additional classification models like support vector machines revealed the power of hyperparameter 
+        tuning.  Many combinations of parameters were trained and validated with all data sets returning different results.  
+        In addition, post-hoc analysis like calibration was completed to further refine models (in this case, 
+        decision thresholds) based on probabilities.  Changing scoring metrics in grid search tuning showed that there is a 
+        delicate balance to parameters in relation to model performance as one slight change can meaningfully change test results.  
+        As this data is not the type that would suffer greatly from poor recall (as would medical testing or fraud), one 
+        needs to consider the balance of recall and the other metrics like accuracy and precision.    
+      </p>
       
       <p>The project plans to work with the available retail data and answer
         the following questions:</p>

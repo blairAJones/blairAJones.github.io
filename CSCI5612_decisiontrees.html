@@ -69,7 +69,6 @@
       <li class="nav-item"><a class="nav-link active" href="CSCI5612_decisiontrees.html">Decision Trees / Random
           Forests</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_svm.html">SVM</a></li>
-      <li class="nav-item"><a class="nav-link" href="CSCI5612_regression.html">Regression</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_nn.html">Neural Nets</a></li>
       <li class="nav-item"><a class="nav-link" href="CSCI5612_conclusion.html">Conclusion</a></li>
     </ul>
@@ -138,8 +137,8 @@
         </figcaption>
       </figure>
       <p>In addition to the assignment of pricing tiers, a simple
-        “is_high_price” boolean variable was added, based on the median price.
-        Either the pricing tier or is_high_price would then be the response
+        <code>is_high_price</code> boolean variable was added, based on the median price.
+        Either <code>price_tier</code> or <code>is_high_price</code> would then be the response
         variable to be classified.</p>
       <p>Because decision trees can handle both numerical and (encoded)
         categorical data, all features were considering in training. Categorical
@@ -173,14 +172,12 @@
         </p>
       </div>
       <p style="text-align: center;"><img src="images/3/fi_iphone_top10.png" width="40%" /></p>
-      <p>Model number, days listed and title length had over 10% of feature
-        importance.</p>
-      <p>A partial dependence plot was generated based on days listed and
-        title length and class tier <em>high</em> (price).</p>
+      <p>The decision tree and Random Forest models performed well on the iPhone data.
+        Model number was the top feature (~17%), with days listed and model variant (type) also noted.</p>
+      <p>A partial dependence plot was generated based on days listed and class tier <em>high</em> (price).</p>
       <p style="text-align: center;"><img src="images/3/pdp_iphone.png" width="40%" /></p>
-      <p>The plot shows that a as days listed gets higher, items are less likely to be priced as <em>high</em>.
-        Conversely,
-        longer title lengths are more associated with higher priced items.</p>
+      <p>The plot shows that as days listed gets higher, items are more likely to be priced as <em>high</em>.
+      </p>
       <h4 id="soccer-jerseys">Soccer Jerseys</h4>
       <div style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;">
         <p><img src="images/3/cm_soccer.png" alt="Image 1" width="500">
@@ -235,7 +232,7 @@
       <br>
       <h3 id="summary">Summary <a href="#top" style="font-size: 0.5em;">[Top]</a></h3>
       <p>As expected, given the combination of both numerical and categorical
-        (and binary) variables, tree-based models performed fairly well on the
+        (and binary) variables, tree-based models performed well on the
         classification of this data. Depending on product, different features had different levels of importance,
         even in data sets from the same source (Amazon or eBay). This shows there are inherent differences in product
         pricing.

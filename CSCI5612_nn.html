@@ -292,9 +292,9 @@ final_model = SimpleNN(
       <p style="text-align: center;"><img src="images/5/soccer_over_under_reg.png" width="70%" /></p>
       <p>The top ten price prediction misses were sorted.</p>
       <p>Two multiple linear regression models were then trained for
-        comparison using the same features. Different from the iPhone data, the
-        neural net models on the soccer data performed better than basic MLR
-        models.</p>
+        comparison using the same features. MLR did not perform well on the soccer data 
+        as the RMSE is not better than the standard deviation of the price data, and thus 
+        does not offer improvement over using the mean for prediction.</p>
       <p>Adj. R-squared (Original): 0.549<br>
         Adj. R-squared (Log Price): 0.553<br>
         Original Price - Test RMSE: 29.8098<br>

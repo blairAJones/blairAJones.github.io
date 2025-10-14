@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Projects - My Bootstrap Website</title>
+  <title>Projects</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>.navbar-brand {
+  font-size: 1.8rem;   /* bigger size */
+  font-weight: 700;    /* bold */
+  color: white;        /* keep it white */
+}</style>  
 </head>
 <body>
   <!-- Navbar -->
@@ -20,15 +25,13 @@
           <li class="nav-item">
             <a class="nav-link" href="index.html">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle active" href="projects.html" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Projects
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="CSCI5612.html">CSCI5612</a></li>
+              <li><a class="dropdown-item" href="CSCI5612.html">Online Retail Data Insights</a></li>
+              <li><a class="dropdown-item" href="imdb.html">IMDb Data Analysis</a></li>
               <li><a class="dropdown-item" href="coming_soon.html">Coming Soon</a></li>
             </ul>
           </li>
@@ -43,7 +46,8 @@
     <p>Welcome to the projects page! Choose a project from the dropdown menu above or from the list below.</p>
 
     <div class="list-group">
-      <a href="CSCI5612.html" class="list-group-item list-group-item-action">CSCI5612 Project</a>
+      <a href="CSCI5612.html" class="list-group-item list-group-item-action">Online Retail Data Insights</a>
+      <a href="imdb.html" class="list-group-item list-group-item-action">IMDb Data Analysis</a>
       <a href="coming_soon.html" class="list-group-item list-group-item-action">Coming Soon</a>
     </div>
   </div>

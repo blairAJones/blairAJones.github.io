@@ -141,31 +141,39 @@
       $$
 
       <p>Other fields were added using additional data containing port latitude and longitude, which then can be used to
-      calculate 
-      <a href="https://wwf-sight-maps.org/arcgis/rest/services/Global/Ports/MapServer/0/query" target="blank">shipping distance</a>.
-      A module called <code>searoutes</code> was imported and used to
-      calculate true shipping distance, as a Haversine distance using latitude and longitude only captures “great
-      circle” distance and is not realistic when considering shipments from Asia to the east coast of the United States.</p>
+        calculate
+        <a href="https://wwf-sight-maps.org/arcgis/rest/services/Global/Ports/MapServer/0/query" target="blank">shipping
+          distance</a>.
+        A module called <code>searoutes</code> was imported and used to
+        calculate true shipping distance, as a Haversine distance using latitude and longitude only captures “great
+        circle” distance and is not realistic when considering shipments from Asia to the east coast of the United
+        States.
+      </p>
 
-      <p>As mentioned above, an <em>OpenAI</em> API call was used to attempt to classify certain items based on messy product
-      descriptions. For the shoes data, these were descriptions like athletic shoes, dress shoes, boots, etc., to be
-      used as an additional product type feature.</p>
+      <p>As mentioned above, an <em>OpenAI</em> API call was used to attempt to classify certain items based on messy
+        product
+        descriptions. For the shoes data, these were descriptions like athletic shoes, dress shoes, boots, etc., to be
+        used as an additional product type feature.</p>
 
-      <p>Supplier and company (customer) names were cleaned and combined using fuzzy matching and clustering via similarity
-      graph and Top Customer and Top Supplier boolean fields were added based on the top 20. Similarly, route (departure
-      to destination) and port frequency were included as additional shipment features.</p>
+      <p>Supplier and company (customer) names were cleaned and combined using fuzzy matching and clustering via
+        similarity
+        graph and Top Customer and Top Supplier boolean fields were added based on the top 20. Similarly, route
+        (departure
+        to destination) and port frequency were included as additional shipment features.</p>
 
-     <p>For routes, in addition to looking at frequency, a K-Means clustering (K=15) was performed on latitude and
-      longitude coordinates to consolidate geographically close ports, for example, the Ports of Los Angeles and Long
-      Beach. Then, a <code>route_id</code> feature was created as a categorical variable.</p> 
+      <p>For routes, in addition to looking at frequency, a K-Means clustering (K=15) was performed on latitude and
+        longitude coordinates to consolidate geographically close ports, for example, the Ports of Los Angeles and Long
+        Beach. Then, a <code>route_id</code> feature was created as a categorical variable.</p>
 
 
       <hr>
 
       <!-- Seasonality (Paper page 8) -->
       <h2>Seasonality</h2>
-      <!-- PASTE: Seasonality paragraph -->
-      <p></p>
+      <p>Using weights and looking at arrivals per week, a heatmap representing changes from overall average was
+        created, to highlight weeks of the year that have higher or lower arrival weights. This is in line with expected
+        slow-downs in China over the Chinese New Year holiday (January or February yearly), which show up in arrival
+        data in the 12th-14th weeks of the year. </p>
 
       <!-- IMAGE: Figure 1 - Weekly Seasonality Heatmap -->
       <figure style="text-align: center; margin: 30px 0;">

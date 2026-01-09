@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Maritime Trade Analytics</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .nav-tabs .nav-link {
+      white-space: normal !important;
+      word-break: break-word;
+      max-width: 160px;
+      display: block;
+      text-align: center;
+      height: 100%;
+      border: 1px solid transparent;
+    }
+
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-link.active {
+      border-color: #dee2e6 #dee2e6 #fff;
+      background-color: #f8f9fa;
+    }
+
+    .formula {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      margin: 15px 0;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Blair Jones</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="projects.html" role="button"
+              data-bs-toggle="dropdown">Projects</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="CSCI5612.html">Online Retail Data Insights</a></li>
+              <li><a class="dropdown-item" href="imdb.html">IMDb Data Analysis</a></li>
+              <li><a class="dropdown-item active" href="maritime.html">Maritime Trade Analytics</a></li>
+              <li><a class="dropdown-item" href="coming_soon.html">Coming Soon</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Subproject Tabs -->
+  <div class="container mt-3">
+    <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link active" href="maritime.html">Introduction</a></li>
+      <li class="nav-item"><a class="nav-link" href="maritime_data.html">Data Description</a></li>
+      <li class="nav-item"><a class="nav-link" href="maritime_methods.html">Methods</a></li>
+      <li class="nav-item"><a class="nav-link" href="maritime_results.html">Results</a></li>
+      <li class="nav-item"><a class="nav-link" href="maritime_conclusion.html">Conclusions</a></li>
+    </ul>
+
+    <div class="mt-4">
+      <h1 class="mb-4">Maritime Trade Analytics: Costs, Delays & Tariff Impacts</h1>
+      <p><em>Master's Culminating Experience, University of Colorado Boulder — December 2025</em></p>
+
+      <hr>
+
+      <!-- SECTION 1: Executive Summary (Paper page 4) -->
+      <h2>Executive Summary</h2>
+      <p>International trade powers the global economy and significantly impacts GDP growth and individual purchasing
+        power. In the modern economy, the political and social implications of international trade are vast and
+        frequently
+        changing.</p>
+
+      <p>United States importers are challenged with predicting costs and delays of their goods, which affects
+        inventories
+        and trade cycles. In addition, importers face uncertainties as tariff announcements and impacts have shifted
+        significantly in 2025. These costs materially impact procurement budgets and business decisions.</p>
+
+      <p>At the same time, US Customs Enforcement is tasked with identifying potential tariff evasion and maintaining a
+        functioning trade system while handling millions of annual international shipments.</p>
+
+      <p>This project intends to show that machine learning and statistical analysis of international shipments could
+        supplement vast domain knowledge in the field.</p>
+
+      <p>With over five years of available shipment data for footwear, modeling based on landed cost and delay days was
+        performed using different machine learning techniques. In addition, statistical analyses based on historical and
+        geographical trends inform the impacts of tariff announcements in 2025.
+      </p>
+
+      <hr>
+
+      <!-- SECTION 2: Technical Summary (Paper page 4-5) -->
+      <h2>Technical Summary</h2>
+
+      <p>
+        Data was obtained from a paid service called ImportYeti.com, which uses a Freedom of
+        Information Act order to obtain sea shipment bill of lading information retained by US Customs Enforcement.
+        Various search fields are available, like product description, supplier name, and carrier, to name a few. Data
+        is obtained in tabular form (.csv format). This was then imported into Python for cleaning, exploration,
+        analysis and modeling.</p>
+
+      <p>First, a regular expression extracted two words of context around footwear keywords in an attempt to clean the
+        description field. For product categorization, the cleaned descriptions were embedded with
+        \texttt{SentenceTransformer} (all-MiniLM-L6-v2 model) and an \emph{OpenAI} API call to assist with embeddings
+        was used to prepare a product type field, matching by category using cosine similarity. Plotting with
+        \emph{matplotlib} by type and time, along with analyzing large residuals from a simple linear regression found
+        semantic mismatches (e.g., brake shoes rather than footwear), which were then removed from the analysis.</p>
+
+      <p>Once data was cleaned, Random Forest and XGBoost were used for prediction modeling, after which Pytorch neural
+        net architectures (including MLP, ResNet, and Attention models) were built to compare. Neural networks used
+        learned 8-dimensional embeddings for categorical variables (routes, companies, ports, suppliers), enabling the
+        models to capture feature similarity that one-hot or label encoding cannot represent.</p>
+
+      <p>Finally, a tariff analysis on shipments was prepared using various statistical tests, including negative
+        binomial counts (used over Poisson for over-dispersed data), the chi-squared test, Mann-Whitney U tests, and
+        bootstrapped confidence intervals on mean difference.
+      </p>
+
+      <hr>
+
+      <!-- SECTION 3: Background (Paper page 5-6) -->
+      <h2>Background</h2>
+      <!-- PASTE: Section 3 from paper -->
+      <p>International imports of footwear into the United States represent a $28Bn industry as of 
+        <a href="https://usatrade.census.gov" target="blank">2024</a>.</p>
+
+       <p>This project intended to use the available international shipment information for select search terms to
+        determine if various statistical and machine learning techniques can tell a story about the data.</p> 
+
+        <p>A Bill of Lading is a contract of carriage and legal document which details exporter and importer information
+        and responsibility. Fields from this document are parsed and stored in tabular form.</p>
+
+      <!-- Research Questions list -->
+      <p>The following questions were of most interest throughout the project:</p>
+      <ol>
+        <li>For shipments with CIF (Cost, Insurance, Freight) terms, can landed costs be predicted using a number of
+          quantitative and qualitative features, including supplier name, shipment volume, product type etc.?</li>
+        <li>Can delays be predicted using temporal features and carrier information?</li>
+        <li>Due to recent tariff actions, is there a way to identify changes in shipment activity by weight / volume and
+          departure location?</li>
+        <li>Are there certain techniques that model the data better than others, and which features of the data are the
+          most important in those models?</li>
+      </ol>
+
+      <!-- Tariff Timeline Table -->
+      <h3>U.S. Tariff Actions on Chinese Imports</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Tariff Action</th>
+            <th>Announced Rate</th>
+            <th>Announced Date</th>
+            <th>Current Rate</th>
+            <th>Changed Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Navigation -->
+      <div class="mt-5 mb-5 text-center">
+        <a href="maritime_data.html" class="btn btn-primary btn-lg">Next: Data Description →</a>
+      </div>
+
+      <div style="height: 50px;"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

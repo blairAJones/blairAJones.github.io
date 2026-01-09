@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Results</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .navbar-brand { font-size: 1.8rem; font-weight: 700; color: white; }
+    .nav-tabs .nav-link {
+      white-space: normal !important;
+      word-break: break-word;
+      max-width: 160px;
+      display: block;
+      text-align: center;
+      height: 100%;
+      border: 1px solid transparent;
+    }
+    .nav-tabs .nav-link:hover, .nav-tabs .nav-link.active {
+      border-color: #dee2e6 #dee2e6 #fff;
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Main Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Blair Jones</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle active" href="projects.html" role="button" data-bs-toggle="dropdown">Projects</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="CSCI5612.html">Online Retail Data Insights</a></li>
+              <li><a class="dropdown-item" href="imdb.html">IMDb Data Analysis</a></li>
+              <li><a class="dropdown-item active" href="maritime.html">Maritime Trade Analytics</a></li>
+              <li><a class="dropdown-item" href="coming_soon.html">Coming Soon</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Subproject Tabs -->
+  <div class="container mt-3">
+    <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link" href="maritime.html">Introduction</a></li>
+      <li class="nav-item"><a class="nav-link" href="maritime_data.html">Data Description</a></li>
+      <li class="nav-item"><a class="nav-link" href="maritime_methods.html">Methods</a></li>
+      <li class="nav-item"><a class="nav-link active" href="maritime_results.html">Results</a></li>
+      <li class="nav-item"><a class="nav-link" href="maritime_conclusion.html">Conclusions</a></li>
+    </ul>
+
+    <div class="mt-4">
+      <h1 class="mb-4">Results</h1>
+
+      <hr>
+
+      <!-- 6.1 Prediction Models for Costs (Paper page 13) -->
+      <h2>6.1 Prediction Models for Costs</h2>
+
+      <!-- Model comparison table -->
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr>
+            <th>Model</th>
+            <th>RMSE ($)</th>
+            <th>R²</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper page 13 -->
+          <tr><td>OLS</td><td></td><td></td></tr>
+          <tr><td>Random Forest</td><td></td><td></td></tr>
+          <tr><td>XGBoost</td><td></td><td></td></tr>
+          <tr><td>MLP</td><td></td><td></td></tr>
+          <tr><td>ResNet</td><td></td><td></td></tr>
+          <tr><td>Attention</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- PASTE: Paragraphs after table from paper -->
+      <p></p>
+
+      <hr>
+
+      <!-- 6.2 Delay Analysis and Predictions (Paper page 14-15) -->
+      <h2>6.2 Delay Analysis and Predictions</h2>
+
+      <!-- 6.2.1 Analysis -->
+      <h3>6.2.1 Analysis</h3>
+
+      <!-- IMAGE: Figure 3 - Delay Distribution -->
+      <figure style="text-align: center; margin: 30px 0;">
+        <img src="/images/delay_distribution.png" alt="Delay Distribution" class="img-fluid" style="max-width: 70%;" />
+        <figcaption class="text-muted">Figure 3: Delay Distribution</figcaption>
+      </figure>
+
+      <!-- Delay Distribution table -->
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Category</th><th>Count (% of Total)</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>Early (&lt; −1 days)</td><td></td></tr>
+          <tr><td>On Time (−1 to 4 days)</td><td></td></tr>
+          <tr><td>Slight Delay (4–9 days)</td><td></td></tr>
+          <tr><td>Major Delay (&gt; 9 days)</td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Yearly Summary table -->
+      <h4>Yearly Summary</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Year</th><th>Shipments</th><th>Avg Delay</th><th>Median</th><th>Major Delays</th><th>Major %</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>2020</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>2021</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>2022</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>2023</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>2024</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>2025</td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td><strong>TOTAL</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- PASTE: Statistical Test paragraph -->
+      <p></p>
+
+      <!-- 6.2.2 Prediction Models -->
+      <h3>6.2.2 Prediction Models</h3>
+
+      <!-- Model Performance table -->
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr><th>Model</th><th>RMSE (days)</th><th>R²</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>Baseline RF</td><td></td><td></td></tr>
+          <tr><td>Tuned RF</td><td></td><td></td></tr>
+          <tr><td>Tuned XGB</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Feature Importances table -->
+      <h4>Feature Importances for Delay Prediction</h4>
+      <table class="table">
+        <thead>
+          <tr><th>Feature</th><th>Importance</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>carrier</td><td></td></tr>
+          <tr><td>day_of_year</td><td></td></tr>
+          <tr><td>months_since_start</td><td></td></tr>
+          <tr><td>arr_port_volume</td><td></td></tr>
+          <tr><td>company_freq</td><td></td></tr>
+          <tr><td>quantity_per_teu</td><td></td></tr>
+        </tbody>
+      </table>
+
+      <hr>
+
+      <!-- 6.3 Tariff Impacts (Paper page 15-18) -->
+      <h2>6.3 Tariff Impacts</h2>
+      <!-- PASTE: Intro paragraph about departure port vs country of origin -->
+      <p></p>
+
+      <!-- 6.3.1 Shipment Counts -->
+      <h3>6.3.1 Shipment Counts</h3>
+      <!-- PASTE: Section text -->
+      <p></p>
+
+      <!-- Seasonally-Adjusted Negative Binomial Tests table -->
+      <table class="table table-striped">
+        <thead class="table-dark">
+          <tr><th>Country</th><th>Pre→Post Rate</th><th>Change</th><th>Expected</th><th>Actual</th><th>p-value</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- 6.3.2 Weight Analysis -->
+      <h3>6.3.2 Weight Analysis</h3>
+      <!-- PASTE: Section text -->
+      <p></p>
+
+      <!-- Rate-Adjusted Weight Statistics table -->
+      <table class="table">
+        <thead>
+          <tr><th>Metric</th><th>Pre-Tariff</th><th>Post-Tariff</th><th>Change</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>Shipments/day</td><td></td><td></td><td></td></tr>
+          <tr><td>Total weight/day (kg)</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Weight by Origin Country table -->
+      <h4>Weight by Origin Country</h4>
+      <table class="table table-striped table-sm">
+        <thead class="table-dark">
+          <tr><th>Country</th><th>Ship/day Change</th><th>Mean kg/ship Change</th><th>Total kg/day Change</th><th>p-value</th><th>r</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- 6.3.3 Route Shifting -->
+      <h3>6.3.3 Route Shifting</h3>
+      <!-- PASTE: Section text -->
+      <p></p>
+
+      <!-- Route Shifting Rate table -->
+      <table class="table">
+        <thead>
+          <tr><th>Period</th><th>Route Shift</th><th>No Shift</th><th>Total</th><th>Shift Rate (%)</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>Pre-tariff</td><td></td><td></td><td></td><td></td></tr>
+          <tr><td>Post-tariff</td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+      <!-- PASTE: Chi-square result -->
+      <p></p>
+
+      <!-- 6.3.4 Chinese Supplier Analysis -->
+      <h3>6.3.4 Chinese Supplier Analysis</h3>
+      <!-- PASTE: Section text -->
+      <p></p>
+
+      <!-- Origin Distribution table -->
+      <h4>Origin Distribution (Same-Month Apr–Sep Comparison)</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Origin Country</th><th>Pre/day</th><th>Post/day</th><th>Change</th><th>Change %</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Non-China Origin Shifts table -->
+      <h4>Non-China Origin Shifts of Chinese Suppliers</h4>
+      <table class="table">
+        <thead>
+          <tr><th>Category</th><th>Pre (per day)</th><th>Post (per day)</th><th>Daily Change (%)</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>Non-China origins</td><td></td><td></td><td></td></tr>
+          <tr><td>China origin</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- Mann-Whitney results tables -->
+      <h4>Shipment Counts (Shipments/day)</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Category</th><th>U</th><th>p-value</th><th>95% CI</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>Non-China routing</td><td></td><td></td><td></td></tr>
+          <tr><td>China direct</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <h4>Weight (KG/day)</h4>
+      <table class="table table-striped">
+        <thead>
+          <tr><th>Category</th><th>U</th><th>p-value</th><th>95% CI (KG)</th></tr>
+        </thead>
+        <tbody>
+          <!-- PASTE: Table rows from paper -->
+          <tr><td>Non-China routing</td><td></td><td></td><td></td></tr>
+          <tr><td>China direct</td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+
+      <!-- PASTE: Final paragraph -->
+      <p></p>
+
+      <!-- Navigation -->
+      <div class="mt-5 mb-5 text-center">
+        <a href="maritime_methods.html" class="btn btn-outline-secondary">← Methods</a>
+        <a href="maritime_conclusion.html" class="btn btn-primary btn-lg ms-3">Next: Conclusions →</a>
+      </div>
+
+      <div style="height: 50px;"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

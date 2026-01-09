@@ -79,6 +79,10 @@
       <h1 class="mb-4">Maritime Trade Analytics: Costs, Delays & Tariff Impacts</h1>
       <p><em>Master's Culminating Experience, University of Colorado Boulder — December 2025</em></p>
 
+      <a href="https://internationalshipments-235711131719.streamlit.app/" target="_blank" class="btn btn-primary">
+        Launch Interactive Dashboard →
+      </a>
+
       <hr>
 
       <!-- SECTION 1: Executive Summary (Paper page 4) -->
@@ -110,11 +114,14 @@
       <h2>Technical Summary</h2>
 
       <p>
-        Data was obtained from a paid service called ImportYeti.com, which uses a Freedom of
+        Data was obtained from a paid service called
+        <a href="importyeti.com" target="blank">ImportYeti.com</a>
+        which uses a Freedom of
         Information Act order to obtain sea shipment bill of lading information retained by US Customs Enforcement.
         Various search fields are available, like product description, supplier name, and carrier, to name a few. Data
         is obtained in tabular form (.csv format). This was then imported into Python for cleaning, exploration,
-        analysis and modeling.</p>
+        analysis and modeling.
+      </p>
 
       <p>First, a regular expression extracted two words of context around footwear keywords in an attempt to clean the
         description field. For product categorization, the cleaned descriptions were embedded with
@@ -138,13 +145,14 @@
       <!-- SECTION 3: Background (Paper page 5-6) -->
       <h2>Background</h2>
       <!-- PASTE: Section 3 from paper -->
-      <p>International imports of footwear into the United States represent a $28Bn industry as of 
-        <a href="https://usatrade.census.gov" target="blank">2024</a>.</p>
+      <p>International imports of footwear into the United States represent a $28Bn industry as of
+        <a href="https://usatrade.census.gov" target="blank">2024</a>.
+      </p>
 
-       <p>This project intended to use the available international shipment information for select search terms to
-        determine if various statistical and machine learning techniques can tell a story about the data.</p> 
+      <p>This project intended to use the available international shipment information for select search terms to
+        determine if various statistical and machine learning techniques can tell a story about the data.</p>
 
-        <p>A Bill of Lading is a contract of carriage and legal document which details exporter and importer information
+      <p>A Bill of Lading is a contract of carriage and legal document which details exporter and importer information
         and responsibility. Fields from this document are parsed and stored in tabular form.</p>
 
       <!-- Research Questions list -->
@@ -161,6 +169,11 @@
 
       <!-- Tariff Timeline Table -->
       <h3>U.S. Tariff Actions on Chinese Imports</h3>
+      <p>Some important dates regarding tariff announcements in 2025 are as follows. Note that due to the high
+        concentration of footwear imports from China, this specific 
+        <a href="https://www.china-briefing.com/news/us-china-tariff-rates-2025/" target="blank">timeline</a>
+        is significant. </p>
+
       <table class="table table-striped">
         <thead>
           <tr>
@@ -173,25 +186,25 @@
         </thead>
         <tbody>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>Section 301 - List 4A</td>
+            <td>15%</td>
+            <td>9/1/19</td>
+            <td>7.5%</td>
+            <td>2/14/20</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>"Liberation Day"</td>
+            <td>34.0%</td>
+            <td>4/2/25</td>
+            <td>10.0%</td>
+            <td>5/14/25</td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>"Fentanyl"</td>
+            <td>20.0%</td>
+            <td>3/4/25</td>
+            <td>10.0%</td>
+            <td>11/10/25</td>
           </tr>
         </tbody>
       </table>

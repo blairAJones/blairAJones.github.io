@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>IMDb Data Analysis</title>
+  <title>Movie Poster Genre Classification</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .navbar-brand {
@@ -25,6 +25,13 @@
     .nav-tabs .nav-link.active {
       border-color: #dee2e6 #dee2e6 #fff;
       background-color: #f8f9fa;
+    }
+  </style>
+  <style>
+    .equal-height-img {
+      height: 550px;       /* desired height */
+      width: 100%;         /* fill the column width */
+      object-fit: cover;   /* crop if necessary to fit */
     }
   </style>
   <script>
@@ -97,11 +104,27 @@
 
     <!-- Dataset -->
     <h2>Dataset Overview</h2>
-    <p>The dataset consists of movie posters obtained from the free TMDB API, cleaned and mapped to genre labels.  Given
-      
+    <p>The dataset consists of movie posters obtained from the free TMDB API, cleaned and mapped to genre labels. To avoid
+      too many smaller classes, some labels were re-mapped to larger categories, e.g. Adventure -> Action.
     </p>
 
-    <table class="table table-striped">
+
+    <div class="row">
+      <div class="col-md-3">
+        <img src="images/movies/output.png" class="img-fluid" alt="Image 1">
+      </div>
+      <div class="col-md-3">
+        <img src="images/movies/output2.png" class="img-fluid" alt="Image 2">
+      </div>
+      <div class="col-md-3">
+        <img src="images/movies/output3.png" class="img-fluid" alt="Image 3">
+      </div>
+      <div class="col-md-3">
+        <img src="images/movies/output6.png" class="img-fluid" alt="Image 4">
+      </div>
+    </div>
+
+        <table class="table table-striped">
       <thead>
         <tr>
           <th>Statistic</th>
@@ -127,6 +150,7 @@
         </tr>
       </tbody>
     </table>
+
 
     <h4>Class Distribution</h4>
     <table class="table table-striped">
@@ -166,11 +190,32 @@
       </tbody>
     </table>
 
+    <p>Note that this is a multi-label classification. Because of the class imbalances, weights were adjusted in the loss
+      function to give additional weight to the smaller classes during training.
+    </p>
+
     <hr>
 
     <!-- Model Architectures -->
     <h2>Model Architectures</h2>
     <p>Four neural network architectures were implemented and compared:</p>
+
+    <div class="row">
+      <div class="col-md-3">
+        <img src="images/movies/cnn_batchnorm.png" class="equal-height-img" alt="Image 1">
+      </div>
+      <div class="col-md-3">
+        <img src="images/movies/cnn_layernorm.png" class="equal-height-img" alt="Image 2">
+      </div>
+      <div class="col-md-3">
+        <img src="images/movies/cnn_attention.png" class="equal-height-img" alt="Image 3">
+      </div>
+      <div class="col-md-3">
+        <img src="images/movies/vision_transformer.png" class="equal-height-img" alt="Image 4">
+      </div>
+    </div>
+ 
+
 
     <h4>1. CNN with BatchNorm</h4>
     <p>A 4-layer convolutional network (32→64→128→256 channels) with BatchNorm2d normalization, 
@@ -202,7 +247,6 @@
           <th>Macro F1</th>
           <th>Micro F1</th>
           <th>Hamming Acc</th>
-          <th>Subset Acc</th>
         </tr>
       </thead>
       <tbody>
@@ -211,69 +255,87 @@
           <td>0.615</td>
           <td>0.708</td>
           <td>0.736</td>
-          <td>0.177</td>
         </tr>
         <tr>
           <td>CNN + LayerNorm</td>
           <td>0.584</td>
           <td>0.684</td>
           <td>0.697</td>
-          <td>0.113</td>
         </tr>
         <tr style="background-color: #d4edda;">
           <td><strong>CNN + Attention</strong></td>
           <td><strong>0.619</strong></td>
           <td><strong>0.716</strong></td>
           <td><strong>0.752</strong></td>
-          <td><strong>0.232</strong></td>
         </tr>
         <tr>
           <td>Vision Transformer</td>
           <td>0.603</td>
           <td>0.706</td>
           <td>0.734</td>
-          <td>0.191</td>
         </tr>
       </tbody>
     </table>
 
-    <h4>Per-Class F1 Scores (CNN + Attention)</h4>
+    <h4>Per-Class F1 Scores by Model</h4>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Genre</th>
-          <th>Optimal Threshold</th>
-          <th>F1 Score</th>
+          <th>Model</th>
+          <th>Drama</th>
+          <th>Comedy</th>
+          <th>Action</th>
+          <th>Family</th>
+          <th>Horror</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Drama</td>
-          <td>0.25</td>
-          <td>0.813</td>
+          <td>CNN + BatchNorm</td>
+          <td>0.8103</td>
+          <td>0.6467</td>
+          <td>0.7572</td>
+          <td><strong>0.4545</strong></td>
+          <td>0.4061</td>
         </tr>
         <tr>
-          <td>Action</td>
-          <td>0.45</td>
-          <td>0.761</td>
+          <td>CNN + LayerNorm</td>
+          <td>0.8066</td>
+          <td>0.6186</td>
+          <td>0.7444</td>
+          <td>0.3640</td>
+          <td>0.3886</td>
+        </tr>
+        <tr style="background-color: #d4edda;">
+          <td><strong>CNN + Attention</strong></td>
+          <td><strong>0.8130</strong></td>
+          <td><strong>0.6570</strong></td>
+          <td><strong>0.7614</strong></td>
+          <td>0.4348</td>
+          <td><strong>0.4288</strong></td>
         </tr>
         <tr>
-          <td>Comedy</td>
-          <td>0.40</td>
-          <td>0.657</td>
-        </tr>
-        <tr>
-          <td>Family</td>
-          <td>0.60</td>
-          <td>0.435</td>
-        </tr>
-        <tr>
-          <td>Horror</td>
-          <td>0.75</td>
-          <td>0.429</td>
+          <td>Vision Transformer</td>
+          <td>0.8074</td>
+          <td>0.6375</td>
+          <td>0.7537</td>
+          <td>0.4022</td>
+          <td>0.4145</td>
         </tr>
       </tbody>
     </table>
+
+    <p>Here are some sample test posters from the Channel Attention model.</p>
+
+    <div style="text-align: center;">
+      <img src="images/movies/download.png" width="75%">
+    </div>
+
+    <p>Here are some example channels from a select movie.</p>
+
+    <div style="text-align: center;">
+      <img src="images/movies/channels.png" width="75%">
+    </div>
 
     <hr>
 
@@ -291,62 +353,82 @@
       <li><strong>SOAP:</strong> ShampoO with Adam in the Preconditioner's eigenbasis — runs AdamW in Shampoo's eigenbasis</li>
     </ul>
 
-    <h4>Results (15 epochs, CNN + Attention)</h4>
+    <h4>Test Set F1 Scores by Optimizer (CNN + Attention)</h4>
     <table class="table table-striped">
       <thead>
         <tr>
           <th>Optimizer</th>
-          <th>Best Val F1</th>
-          <th>Best Epoch</th>
-          <th>Final Val F1</th>
+          <th>Drama</th>
+          <th>Comedy</th>
+          <th>Action</th>
+          <th>Family</th>
+          <th>Horror</th>
+          <th>Macro F1</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>SGD</td>
-          <td>0.5234</td>
-          <td>15</td>
-          <td>0.5234</td>
+          <td>0.8163</td>
+          <td>0.6371</td>
+          <td><strong>0.7552</strong></td>
+          <td>0.4213</td>
+          <td>0.4083</td>
+          <td>0.608</td>
         </tr>
         <tr>
           <td>Adam</td>
-          <td>0.5891</td>
-          <td>12</td>
-          <td>0.5842</td>
+          <td>0.8102</td>
+          <td>0.6560</td>
+          <td>0.7479</td>
+          <td>0.4315</td>
+          <td>0.4088</td>
+          <td>0.611</td>
         </tr>
         <tr>
           <td>AdamW</td>
-          <td>0.5956</td>
-          <td>13</td>
-          <td>0.5901</td>
+          <td>0.8110</td>
+          <td>0.6528</td>
+          <td>0.7537</td>
+          <td>0.4321</td>
+          <td>0.4094</td>
+          <td>0.612</td>
         </tr>
         <tr>
           <td>Shampoo</td>
-          <td>0.6006</td>
-          <td>10</td>
-          <td>0.5956</td>
+          <td>0.8119</td>
+          <td>0.6256</td>
+          <td>0.7495</td>
+          <td>0.3784</td>
+          <td>0.4187</td>
+          <td>0.597</td>
         </tr>
         <tr style="background-color: #d4edda;">
           <td><strong>SOAP</strong></td>
-          <td><strong>0.6188</strong></td>
-          <td>14</td>
-          <td>0.5883</td>
+          <td><strong>0.8193</strong></td>
+          <td><strong>0.6563</strong></td>
+          <td>0.7532</td>
+          <td><strong>0.4898</strong></td>
+          <td><strong>0.4484</strong></td>
+          <td><strong>0.633</strong></td>
         </tr>
       </tbody>
     </table>
 
     <p><strong>Key observations:</strong></p>
     <ul>
-      <li>SOAP achieved the highest validation F1 of <strong>0.6188</strong>, a +3.0% improvement over Shampoo</li>
-      <li>Second-order methods (Shampoo, SOAP) outperformed first-order methods (SGD, Adam, AdamW)</li>
-      <li>SGD showed the slowest convergence and lowest overall performance</li>
+      <li>SOAP achieved the highest test F1</li>
+      <li>SOAP uses row and column correlations (via two preconditioner matrices) 
+        to extract additional data relationships.  This may work well with a Channel Attention
+        model which uses dependencies between channels via learned weights and bottlenecking.
+      </li>
       <li>AdamW provided a modest improvement over standard Adam</li>
     </ul>
 
     <hr>
 
-    <!-- Key Findings -->
-    <h2>Key Findings</h2>
+
+    <h2>Conclusions</h2>
     <ol>
       <li><strong>Channel attention improves performance:</strong> Adding CBAM-style attention consistently outperformed 
           both normalization variants, achieving the best overall metrics.</li>
@@ -393,9 +475,9 @@
     </ul>
 
 
-    <a href="https://github.com/blairAJones/IMDb-Data-Analysis" target="_blank" class="btn btn-primary">
+    <!-- <a href="https://github.com/blairAJones/IMDb-Data-Analysis" target="_blank" class="btn btn-primary">
       View on GitHub →
-    </a>
+    </a> -->
 
     <div style="height: 50px;"></div>
   </div>

@@ -20,6 +20,15 @@
       background-color: #f8f9fa;
     }
   </style>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 
 <body>
@@ -61,42 +70,58 @@
     <div class="mt-4">
       <h1 class="mb-4">Conclusions</h1>
 
-      <!-- PASTE: Section 7 intro from paper (page 19) -->
-      <p></p>
+      <p>This project studied over one hundred thousand footwear shipments over the past five years to answer the following:</p>
 
-      <!-- Question 1: Can landed costs be predicted? -->
       <h3>Can landed costs be predicted?</h3>
-      <!-- PASTE: Answer from paper -->
-      <p></p>
+      <p>Yes, for the available shipments with CIF terms, both tree-based and neural network regression models were able to
+        predict costs with high $R^2$ values (over 85%) and predictive power over the standard deviation (\$5-\$6 compared
+        with \$16 std. dev.). Both these model types allow for flexibility in numerous categorical data, which is important
+        for this data set. Interpretability is higher for the tree-based models over the neural networks; but overall
+        performance for costs was highest for the attention model. </p>
 
-      <!-- Question 2: Can delays be predicted? -->
       <h3>Can delays be predicted?</h3>
-      <!-- PASTE: Answer from paper -->
-      <p></p>
+      <p>Partially. Tree-based models were used given the high number of categorical features as well as larger data set
+        (160K+ lines, compared with costs only using the CIF data at 14K+). The random forest model predicted delays within
+        3.3 days; compared with an overall standard deviation of 5.7 days. </p>
 
-      <!-- Question 3: Are there impacts to recent 2025 tariff announcements? -->
       <h3>Are there impacts to recent 2025 tariff announcements and implementations?</h3>
-      <!-- PASTE: Answer from paper -->
-      <p></p>
+      <p>Yes, based on the negative binomial (counts) and Mann-Whitney U tests (weight), a number of countries displayed
+        significant changes in shipment rates pre and post tariff announcements (both increases noted in some southeast Asian
+        countries like Indonesia and Vietnam along with the decrease from China). For Chinese suppliers, the rate and volume
+        in which shipments originating from China vs. Non-Chinese countries changed significantly in the post period.
+      </p>
 
-      <!-- Question 4: Which models / techniques perform best? -->
       <h3>Which models / techniques perform best on this data?</h3>
-      <!-- PASTE: Answer from paper -->
-      <p></p>
+      <p>As expected, tree-based models performed well given the flexibility and the high number of categorical features. In
+        addition, the random selection of features and regularization allow for these models to adjust to potential
+        correlation between features. Initially, these outperformed neural network models until new embedded features (which
+        are randomly initialized then learned during training) like company name and supplier country were added. It is
+        thought that using one-hot-encoding for the large number of unique categorical features did not help these models
+        learn the data, and only when the dense embeddings were formed did the neural networks perform above standard machine
+        learning techniques. </p>
 
       <hr>
 
-      <!-- 7.1 Considerations (Paper page 20) -->
-      <h2>7.1 Considerations</h2>
-      <!-- PASTE: Section 7.1 from paper -->
-      <p></p>
+
+      <h2>Considerations</h2>
+      <p>As mentioned above, <em>Country of Origin</em> is the determination of tariff rates and not <em>departure port</em>.
+        Lacking the ability to obtain a commercial invoice which should state the proper origin, this analysis had to work
+        with the available data which only includes the port in which the goods last left before arriving in the United
+        States. It cannot be said with certainty that changes in departure ports post-2025 tariffs announcements are suppliers
+        actively avoiding tariffs. This analysis was prepared to identify if there were any changes in business behavior that
+        could be statistically tested.
+      
+        Also, the post tariff period is only six months, so the observed patterns may be temporary. </p>
 
       <hr>
 
-      <!-- 7.2 Future Analysis (Paper page 20) -->
-      <h2>7.2 Future Analysis</h2>
-      <!-- PASTE: Section 7.2 from paper -->
-      <p></p>
+      <h2>Future Analysis</h2>
+      <p>Additional product searches for other goods would be a natural continuation of this research. In addition, a more
+        in-depth analysis of vendor and customer relationships and concentrations could deepen the analysis and help explain
+        larger business trends. Given the success of some categorical feature embeddings within the neural networks,
+        additional feature engineering should be considered. Also, continuing to track movement from exporting countries would
+        provide a longer-term picture of tariff impacts once more time has passed, as well as looking at other dates as
+        cut-off points given the ever-changing announcements at the beginning and through 2025. </p>
 
       <hr>
 
@@ -107,7 +132,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">📄 Full Paper</h5>
-              <p class="card-text">Complete academic paper with methodology details and references.</p>
+              <p class="card-text">Complete academic paper</p>
               <a href="/assets/BlairJones_CE_Paper.pdf" class="btn btn-primary" target="_blank">Download PDF</a>
             </div>
           </div>
@@ -117,7 +142,7 @@
             <div class="card-body">
               <h5 class="card-title">💻 Code Repository</h5>
               <p class="card-text">Python code for data cleaning, modeling, and analysis.</p>
-              <a href="https://github.com/blairAJones/" class="btn btn-dark" target="_blank">View on GitHub</a>
+              <a href="https://github.com/blairAJones/International_Shipments" class="btn btn-dark" target="_blank">View on GitHub</a>
             </div>
           </div>
         </div>

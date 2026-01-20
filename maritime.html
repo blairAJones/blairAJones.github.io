@@ -125,9 +125,9 @@
 
       <p>First, a regular expression extracted two words of context around footwear keywords in an attempt to clean the
         description field. For product categorization, the cleaned descriptions were embedded with
-        \texttt{SentenceTransformer} (all-MiniLM-L6-v2 model) and an \emph{OpenAI} API call to assist with embeddings
+        <code>SentenceTransformer </code>(all-MiniLM-L6-v2 model) and an <em>OpenAI</em> API call to assist with embeddings
         was used to prepare a product type field, matching by category using cosine similarity. Plotting with
-        \emph{matplotlib} by type and time, along with analyzing large residuals from a simple linear regression found
+        <em>matplotlib</em> by type and time, along with analyzing large residuals from a simple linear regression found
         semantic mismatches (e.g., brake shoes rather than footwear), which were then removed from the analysis.</p>
 
       <p>Once data was cleaned, Random Forest and XGBoost were used for prediction modeling, after which Pytorch neural

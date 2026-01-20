@@ -5,7 +5,12 @@
   <title>Methods</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    .navbar-brand { font-size: 1.8rem; font-weight: 700; color: white; }
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
     .nav-tabs .nav-link {
       white-space: normal !important;
       word-break: break-word;
@@ -15,10 +20,13 @@
       height: 100%;
       border: 1px solid transparent;
     }
-    .nav-tabs .nav-link:hover, .nav-tabs .nav-link.active {
+
+    .nav-tabs .nav-link:hover,
+    .nav-tabs .nav-link.active {
       border-color: #dee2e6 #dee2e6 #fff;
       background-color: #f8f9fa;
     }
+
     .formula {
       background: #f8f9fa;
       padding: 15px;
@@ -28,6 +36,15 @@
       text-align: center;
     }
   </style>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 
 <body>
@@ -43,7 +60,8 @@
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle active" href="projects.html" role="button" data-bs-toggle="dropdown">Projects</a>
+            <a class="nav-link dropdown-toggle active" href="projects.html" role="button"
+              data-bs-toggle="dropdown">Projects</a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="CSCI5612.html">Online Retail Data Insights</a></li>
               <li><a class="dropdown-item" href="imdb.html">IMDb Data Analysis</a></li>
@@ -71,81 +89,201 @@
 
       <hr>
 
-      <!-- 5.1 Data Cleaning (Paper page 9) -->
-      <h2>5.1 Data Cleaning</h2>
-      <!-- PASTE: Section 5.1 from paper -->
-      <p></p>
+      <h2>Data Cleaning</h2>
+      <p>
+        Data cleaning is a process that is performed throughout the project. The original shoe data was over 192,000
+        shipments
+        long. A cursory review of the data revealed some issues with product search, for example, “brake shoes”
+        included, which
+        then can be removed initially. However, due to the large data size, many of these mismatched product
+        descriptions were
+        not able to be identified until an initial regression was performed using \emph{weight} as a response, in order
+        to find
+        potential issues with the data. After running a simple linear regression, top residuals were printed and matched
+        to the
+        original data fields where a number of other ambiguous search terms were included, such as shoe “shelving /
+        furniture”
+        and other industrial wording like “aluminum”, “iron” and “wheel.” The process of removing these unintended items
+        needed
+        to be completed a number of times before the data was ready for analysis. The final dataset, representing
+        footwear
+        shipments from January 2020 to September 2025, was 161,214 lines.</p>
+
+      <p>The data from the source does not contain significant missing values. As noted above, CIF (cost) is only
+        available on
+        certain shipments with those specific incoterms; therefore, the data was split into two differently sized data
+        sets
+        depending on the task. The cleaned CIF data was 14,250 lines.
+      </p>
 
       <hr>
 
-      <!-- 5.2 Prediction Models for Costs (Paper page 9-10) -->
-      <h2>5.2 Prediction Models for Costs</h2>
-      <!-- PASTE: Section 5.2 from paper -->
-      <p></p>
+      <h2>Prediction Models for Costs</h2>
+      <p>All footwear shipments were filtered by line items that contained a value in the CIF field and separated into a
+        new
+        dataset which was used for cost prediction analysis. After filtering for significant outliers (over 99.5%
+        percentile
+        on the higher-end), the dataset was 14,250 shipments long. Because all shipments are different sizes, a cost per
+        kg
+        field was created as the response variable, as weight in kg is a consistent field across all line items.</p>
 
-      <!-- RMSE Formula -->
-      <div class="formula">
-        RMSE = √(1/n × Σ(yᵢ - ŷᵢ)²)
-      </div>
+      <p>An initial Ordinary Least Squares model was run as a baseline to compare to other models. Features were split
+        by
+        numerical, boolean and categorical, with the categorical variables then being one-hot-encoded. Numerical
+        features
+        include volume, distance, and cyclical-month coding, among others. Boolean features include top company /
+        supplier and
+        additional product information, i.e. if the product description contained the word "garment" or "handbag",
+        indicating
+        a mixed shipment. Categorical variables included product type (e.g. athletic shoes, dress shoes), and quantity
+        unit of
+        measure.</p>
 
-      <!-- R² Formula -->
-      <div class="formula">
-        R² = 1 − [Σ(yᵢ - ŷᵢ)² / Σ(yᵢ - ȳ)²]
-      </div>
+      <p>For Random Forest and XGBoost, the previous features were included along with some additional categorical
+        columns,
+        like company name, route ID (given based on specific departure to arrival port), port names and supplier
+        country.
+        These were added after first label encoding into integer values and then included as a numerical feature.
+        Because of
+        the nature of these models, categorical features encoded as numbers do not affect performance as the models do
+        not
+        look at magnitude necessarily, but rather use an order-based split to rank predictions. Doing this instead of
+        one-hot
+        encoding prevents an explosion of the feature space when the number of unique categories is significant (e.g.
+        company
+        names). Because of the additional features, the comparison from OLS to tree-based models is not exactly direct;
+        however, the flexibility of the tree-based models is simply noted and expected to improve performance as
+        training is
+        built out for this data.</p>
+
+      <p>Note that once neural networks were trained, these label encoded categorical features were removed as simple
+        numerical
+        features, since there is no sense of actual numerical value. Rather, they were converted to embeddings, which
+        would
+        take either a previously sparse one-hot-encoded vector or non-meaningful label encoded vector and convert those
+        features to dense representations which can relate within; meaning, features with similarities should end up
+        close in
+        the embedding space and provide meaningful relationships when learned through training.</p>
+
+      <p>Hyperparameters were tuned by random grid search on both Random Forest and XGBoost models. The hyperparameters
+        considered were number of trees, maximum depth, minimum split and minimum leaf size for the random forest
+        models, with
+        additional tuning for regularization and learning rate for the XGBoost models.</p>
+
+      <p>Several \emph{PyTorch} neural networks were built including a simple feed-forward neural network (MLP), a
+        residual
+        block network (ResNet) and an Attention model. The MLP model is a standard fully connected layer network with
+        batch
+        normalization, ReLU activation and dropout regularization. The ResNet model extends the MLP with skip
+        connections that
+        add each block's input to its output, allowing the network to learn from residuals. The attention model adds a
+        feature
+        attention mechanism that learns to weight features based on relevance. This allows the model to emphasize
+        different
+        features dynamically.</p>
+
+      <p>The loss function for all prediction models was root mean squared error:</p>
+      \begin{align}
+      \text{RMSE} &= \sqrt{\frac{1}{n}\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}
+      \end{align}
+
+      <p>The coefficient of determination $R^2$ was also used to compare model performance.</p>
+      \begin{align}
+      R^2 &= 1 - \frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{\sum_{i=1}^{n}(y_i - \bar{y})^2}
+      \end{align}
 
       <hr>
 
-      <!-- 5.3 Prediction Models for Delays (Paper page 10-11) -->
-      <h2>5.3 Prediction Models for Delays</h2>
-      <!-- PASTE: Section 5.3 from paper -->
-      <p></p>
+      <h2>Prediction Models for Delays</h2>
+      <p>All shipment data regardless of the inclusion of the CIF field were considered for delay analysis. When
+        reviewing delays over time, significant increases were found in mid-2021 through mid-2022. These were related to
+        the Supply Chain crisis post Covid lockdowns, in which some Chinese factories faced closures, U.S. ports and
+        trucking faced labor shortages and consumer demand was surging. </p>
 
-      <!-- IMAGE: Figure 2 - Delays Over Time -->
       <figure style="text-align: center; margin: 30px 0;">
-        <img src="/images/delays_over_time.png" alt="Delays Over Time" class="img-fluid" style="max-width: 90%;" />
+        <img src="/images/maritime/delays.png" alt="Delays Over Time" class="img-fluid" style="max-width: 90%;" />
         <figcaption class="text-muted">Figure 2: Delays Over Time</figcaption>
       </figure>
 
+      <p>Because of this clear trend, delay prediction was performed post June-2022, to allow for the model to train on
+        shipments that arrived in a more normalized time-frame.</p>
+      
+      <p>A baseline random forest and tuned RF and XGBoost models were trained on the data. A random grid search for
+        hyperparameter tuning, similar to cost predictions, was also performed.</p> 
+      
+      <p>Features were similar to costs for the tree-based models in that some categorical features were label encoded to avoid
+        a significant increase to the column space. Because the delays analysis uses all shipment data, the number of
+        potential unique values is well above the already large number seen in the CIF data set. Therefore, this analysis
+        stuck with tree-based models and some label-encoded categorical variables. </p>
+
       <hr>
 
-      <!-- 5.4 Tariff Analysis (Paper page 11-12) -->
-      <h2>5.4 Tariff Analysis</h2>
+      <h2>Tariff Analysis</h2>
 
-      <!-- 5.4.1 Data Preparation -->
-      <h3>5.4.1 Data Preparation</h3>
-      <!-- PASTE: Section 5.4.1 from paper -->
-      <p></p>
+      <h3>Data Preparation</h3>
+      <p>A large part of the project was attempting to identify potential business changes after 2025 tariff announcements. As
+        per the chart in Data Description, the majority of footwear imports arrive from China (61% of total shipments within
+        the period reviewed, January 2020 through September 2025).</p>
+      
+       <p>Although there have been a number of announcements and updates to various tariff rates and impacted countries, a
+        significant announcement was made on April 2nd, 2025 (<em>Liberation Day</em>), including all trade partners; therefore,
+        the attempt to quantify tariff impacts into a “pre” and “post” period used this day as delineation.</p> 
+      
+       <p>Because of changes in seasonality, the <em>pre</em> periods include April through September only, so as to not confuse
+        differences in volumes to ongoing temporal factors. Therefore, the data in this section is restricted to April 2022
+        forward.</p>
 
-      <!-- 5.4.2 Shipment Counts (Negative Binomial) -->
-      <h3>5.4.2 Shipment Counts (Negative Binomial)</h3>
-      <!-- PASTE: Section 5.4.2 from paper -->
-      <p></p>
+      <h3>Shipment Counts (Negative Binomial)</h3>
+      <p>It was noted that in terms of shipment counts, the data is overdispersed, meaning the variance exceeds the mean.
+        Because of this, a traditional Poisson test for count data was not appropriate. The negative binomial distribution,
+        $\text{NB}(r, p)$, models count data with overdispersion because an additional dispersion parameter $r$ accounts for
+        excess variance.</p>
+      
+        <p>\begin{align}
+        &P(Y = k) = \binom{k + r - 1}{k} p^r (1-p)^k \\
+        \end{align}
+        with mean $\mu = r(1-p)/p$ and variance $\sigma^2 = \mu + \mu^2/r$.</p>
 
-      <!-- Negative Binomial Formula -->
-      <div class="formula">
-        P(Y = k) = C(k + r − 1, k) × p^r × (1 − p)^k<br>
-        with mean μ = r(1 − p)/p and variance σ² = μ + μ²/r
-      </div>
+        <p>By factoring in larger variances, the changes over time periods should be less likely to be overstated in significance
+        as there is an expectation of changes anyway (high variance). </p>
 
-      <!-- 5.4.3 Weight Analysis (Mann-Whitney U Test) -->
-      <h3>5.4.3 Weight Analysis (Mann-Whitney U Test)</h3>
-      <!-- PASTE: Section 5.4.3 from paper -->
-      <p></p>
 
-      <!-- U statistic formula -->
-      <div class="formula">
-        U = R − n(n + 1)/2
-      </div>
+      <h3>Weight Analysis (Mann-Whitney U Test)</h3>
+      <p>Changes in weight per shipment were tested using the Mann-Whitney U test, which is a non-parametric statistical test
+        that asseses whether groups originate from the same distribution. Due to the skewed nature of the data, this was
+        selected over other standard tests.</p>
+      
+       <p> The U statistic is computed as:</p>
+      
+       $$\begin{align}
+        U = R - \frac{n(n+1)}{2}
+        \end{align}$$
+      
+        Where $R$ is the sum of ranks for one group.</p>
+      
+        <p>The rank-biserial correlation ($r$) was computed as an effect size measure, where $|r| > 0.1$ indicates a small
+        effect, $|r| > 0.3$ a medium effect, and $|r| > 0.5$ a large effect.</p>
 
-      <!-- 5.4.4 Route Shifting (Chi-Squared) -->
-      <h3>5.4.4 Route Shifting (Chi-Squared)</h3>
-      <!-- PASTE: Section 5.4.4 from paper -->
-      <p></p>
 
-      <!-- 5.4.5 Chinese Supplier Analysis -->
-      <h3>5.4.5 Chinese Supplier Analysis (Mann-Whitney / Bootstrap C.I.)</h3>
-      <!-- PASTE: Section 5.4.5 from paper -->
-      <p></p>
+      <h3>Route Shifting (Chi-Squared)</h3>
+      <p>The original data contains both a departure country (port) field and supplier country field. These were compared and
+        highlighted if a non-match. A contingency table was prepared and a Chi-squared test was performed. Note that suppliers
+        can be multinational with factories in many countries and the available supplier address may be located in a place for
+        specific contact or payment reasons.</p>
+
+      <h3>Chinese Supplier Analysis (Mann-Whitney / Bootstrap C.I.)</h3>
+      <p>Due to the concentration of Chinese imports, a more specific Chinese supplier analysis was performed, which looked at
+        imports specifically from suppliers which have a Chinese country code. Two groups were formed; those shipments which
+        were shipped from a Chinese port, and those that were shipped from other countries' ports.</p>
+      
+        <p>Daily shipment counts and weights for each routing category were compared between periods using two methods:</p>
+      
+        <ol>
+        <li><strong>Mann-Whitney U test</strong>: Non-parametric comparison of daily rate distributions</li>
+        <li> <strong>Bootstrap confidence interval</strong>: 1,000 bootstrap samples were drawn to form 95\% confidence intervals for
+        the difference in mean daily rates; significance was concluded when the interval excluded zero</li>
+        </ol>
+      
 
       <!-- Navigation -->
       <div class="mt-5 mb-5 text-center">
@@ -159,4 +297,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

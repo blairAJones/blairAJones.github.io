@@ -2,15 +2,15 @@
 <html>
 
 <head>
-  <title>IMDb Project Overview</title>
+  <title>IMDb Data Analysis</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>.navbar-brand {
-  font-size: 1.8rem;   /* bigger size */
-  font-weight: 700;    /* bold */
-  color: white;        /* keep it white */
-}</style>  
   <style>
-    /* wrap tab labels */
+    .navbar-brand {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+    }
+
     .nav-tabs .nav-link {
       white-space: normal !important;
       word-break: break-word;
@@ -18,18 +18,24 @@
       display: block;
       text-align: center;
       height: 100%;
-      /* ensure uniform tab height */
       border: 1px solid transparent;
-      /* fix alignment shift on hover */
     }
 
     .nav-tabs .nav-link:hover,
     .nav-tabs .nav-link.active {
       border-color: #dee2e6 #dee2e6 #fff;
-      /* fix active tab border */
       background-color: #f8f9fa;
     }
   </style>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 
 <body>
@@ -37,7 +43,7 @@
   <!-- Main Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Blair Jones</a>
+      <a class="navbar-brand" href="index.html">Blair Jones</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -51,8 +57,8 @@
               Projects
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item active" href="CSCI5612.html">Online Retail Data Insights</a></li>
-              <li><a class="dropdown-item active" href="imdb.html">IMDb Data Analysis</a></li>
+              <li><a class="dropdown-item" href="CSCI5612.html">Online Retail Data Insights</a></li>
+              <li><a class="dropdown-item active" href="imdb.html">Movie Poster Genre Classification</a></li>
               <li><a class="dropdown-item" href="maritime.html">Maritime Trade Analytics</a></li>
               <li><a class="dropdown-item" href="coming_soon.html">Coming Soon</a></li>
             </ul>
@@ -62,7 +68,339 @@
     </div>
   </nav>
 
-<div class="container mt-4">
-  <h1 class="mb-4" id="imdb-data-analysis">IMDb Data Analysis</h1>
-  <p>Coming soon. <a href="https://github.com/blairAJones/IMDb-Data-Analysis" target="_blank">Github</a> </p>
-</div>
+  <div class="container mt-4">
+    <h1 class="mb-4">Movie Poster Genre Classification</h1>
+    <p><em>Deep Learning Project — University of Colorado Boulder</em></p>
+
+    <hr>
+
+    <!-- Executive Summary -->
+    <h2>Executive Summary</h2>
+    <p>This project explores whether movie genres can be predicted from poster images alone using various neural network
+      architectures.
+      Movie posters are designed to convey genre information visually—horror films use dark colors and unsettling imagery,
+      comedies feature bright colors and smiling faces, and action movies often display explosions.</p>
+
+    <p>Using a dataset of approximately <strong>10,000 movie posters</strong> from 
+      <a href = "https://www.themoviedb.org/" target="_blank">The Movie Database</a>
+      mapped to five genre categories 
+       (Drama, Comedy, Action, Family, Horror), multiple neural network architectures were trained and compared. 
+       This multi-label classification problem allows movies to belong to multiple genres simultaneously.</p>
+
+    <p>The best performing model—a <strong>CNN with Channel Attention</strong>—achieved a Macro F1 score of <strong>0.619</strong> 
+       and Hamming Accuracy of <strong>75.2%</strong>. Additionally, advanced optimizers including
+       <a href = "https://arxiv.org/abs/2409.11321" target="_blank">SOAP</a> 
+      (ShampoO with Adam in the Preconditioner's eigenbasis) were evaluated, showing improved convergence over standard
+      methods.</p>
+
+    <hr>
+
+    <!-- Dataset -->
+    <h2>Dataset Overview</h2>
+    <p>The dataset consists of movie posters obtained from the free TMDB API, cleaned and mapped to genre labels.  Given
+      
+    </p>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Statistic</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Total Posters</td>
+          <td>9,945</td>
+        </tr>
+        <tr>
+          <td>Image Resolution</td>
+          <td>224 × 224</td>
+        </tr>
+        <tr>
+          <td>Genre Classes</td>
+          <td>5 (Drama, Comedy, Action, Family, Horror)</td>
+        </tr>
+        <tr>
+          <td>Train / Val / Test Split</td>
+          <td>64% / 16% / 20%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Class Distribution</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Genre</th>
+          <th>Samples</th>
+          <th>Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Drama</td>
+          <td>6,830</td>
+          <td>68.7%</td>
+        </tr>
+        <tr>
+          <td>Action</td>
+          <td>5,736</td>
+          <td>57.7%</td>
+        </tr>
+        <tr>
+          <td>Comedy</td>
+          <td>3,390</td>
+          <td>34.1%</td>
+        </tr>
+        <tr>
+          <td>Horror</td>
+          <td>1,480</td>
+          <td>14.9%</td>
+        </tr>
+        <tr>
+          <td>Family</td>
+          <td>1,126</td>
+          <td>11.3%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- Model Architectures -->
+    <h2>Model Architectures</h2>
+    <p>Four neural network architectures were implemented and compared:</p>
+
+    <h4>1. CNN with BatchNorm</h4>
+    <p>A 4-layer convolutional network (32→64→128→256 channels) with BatchNorm2d normalization, 
+       MaxPooling, and a fully connected head (512→5). This serves as the baseline architecture.</p>
+
+    <h4>2. CNN with LayerNorm</h4>
+    <p>Identical architecture to the BatchNorm variant, but using GroupNorm with 1 group 
+       (equivalent to LayerNorm) to compare normalization techniques.</p>
+
+    <h4>3. CNN with Channel Attention</h4>
+    <p>Extends the BatchNorm CNN by adding CBAM-style channel attention modules after each 
+       convolutional block. Uses both average and max pooling with a reduction ratio of 16.</p>
+
+    <h4>4. Vision Transformer (ViT)</h4>
+    <p>A pure self-attention architecture with 16×16 patches, embedding dimension of 192, 
+       6 attention heads, and 4 transformer blocks. Includes learnable position embeddings and a CLS token for classification.</p>
+
+    <hr>
+
+    <!-- Results -->
+    <h2>Results</h2>
+    <p>All models were evaluated on the test set using per-class optimal thresholds.</p>
+
+    <h4>Overall Performance</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Macro F1</th>
+          <th>Micro F1</th>
+          <th>Hamming Acc</th>
+          <th>Subset Acc</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CNN + BatchNorm</td>
+          <td>0.615</td>
+          <td>0.708</td>
+          <td>0.736</td>
+          <td>0.177</td>
+        </tr>
+        <tr>
+          <td>CNN + LayerNorm</td>
+          <td>0.584</td>
+          <td>0.684</td>
+          <td>0.697</td>
+          <td>0.113</td>
+        </tr>
+        <tr style="background-color: #d4edda;">
+          <td><strong>CNN + Attention</strong></td>
+          <td><strong>0.619</strong></td>
+          <td><strong>0.716</strong></td>
+          <td><strong>0.752</strong></td>
+          <td><strong>0.232</strong></td>
+        </tr>
+        <tr>
+          <td>Vision Transformer</td>
+          <td>0.603</td>
+          <td>0.706</td>
+          <td>0.734</td>
+          <td>0.191</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Per-Class F1 Scores (CNN + Attention)</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Genre</th>
+          <th>Optimal Threshold</th>
+          <th>F1 Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Drama</td>
+          <td>0.25</td>
+          <td>0.813</td>
+        </tr>
+        <tr>
+          <td>Action</td>
+          <td>0.45</td>
+          <td>0.761</td>
+        </tr>
+        <tr>
+          <td>Comedy</td>
+          <td>0.40</td>
+          <td>0.657</td>
+        </tr>
+        <tr>
+          <td>Family</td>
+          <td>0.60</td>
+          <td>0.435</td>
+        </tr>
+        <tr>
+          <td>Horror</td>
+          <td>0.75</td>
+          <td>0.429</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr>
+
+    <!-- Optimizer Comparison -->
+    <h2>Optimizer Comparison</h2>
+    <p>Five optimizers were evaluated on the CNN + Attention architecture to study convergence behavior 
+       and compare first-order methods against second-order preconditioning approaches.</p>
+
+    <h4>Optimizers Tested</h4>
+    <ul>
+      <li><strong>SGD:</strong> Stochastic Gradient Descent with momentum</li>
+      <li><strong>Adam:</strong> Adaptive Moment Estimation</li>
+      <li><strong>AdamW:</strong> Adam with decoupled weight decay</li>
+      <li><strong>Shampoo:</strong> Second-order optimizer using Kronecker-factored preconditioning</li>
+      <li><strong>SOAP:</strong> ShampoO with Adam in the Preconditioner's eigenbasis — runs AdamW in Shampoo's eigenbasis</li>
+    </ul>
+
+    <h4>Results (15 epochs, CNN + Attention)</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Optimizer</th>
+          <th>Best Val F1</th>
+          <th>Best Epoch</th>
+          <th>Final Val F1</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SGD</td>
+          <td>0.5234</td>
+          <td>15</td>
+          <td>0.5234</td>
+        </tr>
+        <tr>
+          <td>Adam</td>
+          <td>0.5891</td>
+          <td>12</td>
+          <td>0.5842</td>
+        </tr>
+        <tr>
+          <td>AdamW</td>
+          <td>0.5956</td>
+          <td>13</td>
+          <td>0.5901</td>
+        </tr>
+        <tr>
+          <td>Shampoo</td>
+          <td>0.6006</td>
+          <td>10</td>
+          <td>0.5956</td>
+        </tr>
+        <tr style="background-color: #d4edda;">
+          <td><strong>SOAP</strong></td>
+          <td><strong>0.6188</strong></td>
+          <td>14</td>
+          <td>0.5883</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p><strong>Key observations:</strong></p>
+    <ul>
+      <li>SOAP achieved the highest validation F1 of <strong>0.6188</strong>, a +3.0% improvement over Shampoo</li>
+      <li>Second-order methods (Shampoo, SOAP) outperformed first-order methods (SGD, Adam, AdamW)</li>
+      <li>SGD showed the slowest convergence and lowest overall performance</li>
+      <li>AdamW provided a modest improvement over standard Adam</li>
+    </ul>
+
+    <hr>
+
+    <!-- Key Findings -->
+    <h2>Key Findings</h2>
+    <ol>
+      <li><strong>Channel attention improves performance:</strong> Adding CBAM-style attention consistently outperformed 
+          both normalization variants, achieving the best overall metrics.</li>
+      <li><strong>BatchNorm outperforms LayerNorm for CNNs:</strong> BatchNorm showed better results than LayerNorm 
+          (GroupNorm with 1 group) in this vision task.</li>
+      <li><strong>ViT needs more data:</strong> The Vision Transformer performed comparably but didn't surpass CNNs, 
+          likely due to the relatively small dataset size (~10K images).</li>
+      <li><strong>Class imbalance matters:</strong> Minority classes (Family, Horror) had significantly lower F1 scores 
+          despite weighted sampling and loss functions.</li>
+      <li><strong>SOAP shows promise:</strong> The SOAP optimizer demonstrated faster convergence and better final 
+          performance than Shampoo.</li>
+    </ol>
+
+    <hr>
+
+    <!-- Methods -->
+    <h2>Methods</h2>
+
+    <h4>Data Augmentation</h4>
+    <ul>
+      <li>Random horizontal flip</li>
+      <li>Random rotation (±10°)</li>
+      <li>Random perspective distortion (scale=0.2, p=0.5)</li>
+      <li>Color jitter (brightness=0.3, contrast=0.6, saturation=0.2, hue=0.1)</li>
+      <li>Random grayscale (p=0.1)</li>
+      <li>Random sharpness adjustment</li>
+    </ul>
+
+    <h4>Class Imbalance Handling</h4>
+    <ul>
+      <li>Weighted BCE loss with position weights based on class frequency</li>
+      <li>Weighted random sampling (3× for Horror, 2× for Family)</li>
+      <li>Per-class optimal threshold tuning on validation set</li>
+    </ul>
+
+    <h4>Training Configuration</h4>
+    <ul>
+      <li>Optimizer: AdamW (lr=1e-3)</li>
+      <li>Scheduler: ReduceLROnPlateau (factor=0.5, patience=3)</li>
+      <li>Batch size: 128</li>
+      <li>Epochs: 30</li>
+      <li>Mixed precision training with PyTorch AMP</li>
+      <li>Hardware: NVIDIA Tesla T4 GPU</li>
+    </ul>
+
+
+    <a href="https://github.com/blairAJones/IMDb-Data-Analysis" target="_blank" class="btn btn-primary">
+      View on GitHub →
+    </a>
+
+    <div style="height: 50px;"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
